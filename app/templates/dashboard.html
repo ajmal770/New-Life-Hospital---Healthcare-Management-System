@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Hospital Management System{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Overview</h2>
+    <div class="text-muted"><i class="bi bi-clock me-1"></i> {{ today.strftime('%B %d, %Y') }}</div>
+</div>
+
+<div class="row g-4 mb-5">
+    <!-- Total Doctors -->
+    <div class="col-md-6 col-lg-3">
+        <div class="hms-card analytics-card position-relative overflow-hidden shadow-sm"
+            style="border-top: 4px solid var(--primary-blue);">
+            <div class="analytics-icon icon-blue z-1">
+                <i class="bi bi-person-badge"></i>
+            </div>
+            <div class="z-1 w-100">
+                <p class="analytics-title fw-semibold">Total Doctors</p>
+                <div class="d-flex justify-content-between align-items-baseline mt-1">
+                    <h4 class="analytics-value mb-0">{{ total_doctors }}</h4>
+                    <span class="badge bg-success bg-opacity-10 text-success rounded-pill"
+                        style="font-size: 0.75rem;"><i class="bi bi-arrow-up me-1"></i>2 New</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Today's Appointments -->
+    <div class="col-md-6 col-lg-3">
+        <div class="hms-card analytics-card position-relative overflow-hidden shadow-sm"
+            style="border-top: 4px solid var(--secondary-teal);">
+            <div class="analytics-icon icon-teal z-1">
+                <i class="bi bi-calendar-check"></i>
+            </div>
+            <div class="z-1 w-100">
+                <p class="analytics-title fw-semibold">Today's Appointments</p>
+                <div class="d-flex justify-content-between align-items-baseline mt-1">
+                    <h4 class="analytics-value mb-0">{{ todays_appointments }}</h4>
+                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill"
+                        style="font-size: 0.75rem;"><i class="bi bi-check2-circle me-1"></i>On Track</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Available Slots -->
+    <div class="col-md-6 col-lg-3">
+        <div class="hms-card analytics-card position-relative overflow-hidden shadow-sm"
+            style="border-top: 4px solid var(--status-warning);">
+            <div class="analytics-icon icon-warning z-1">
+                <i class="bi bi-clock-history"></i>
+            </div>
+            <div class="z-1 w-100">
+                <p class="analytics-title fw-semibold">Available Slots</p>
+                <div class="d-flex justify-content-between align-items-baseline mt-1">
+                    <h4 class="analytics-value mb-0">{{ available_slots_today }}</h4>
+                    <span class="badge bg-warning bg-opacity-10 text-warning rounded-pill"
+                        style="font-size: 0.75rem;"><i class="bi bi-lightning-fill me-1"></i>Filling Fast</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patient Satisfaction -->
+    <div class="col-md-6 col-lg-3">
+        <div class="hms-card analytics-card position-relative overflow-hidden shadow-sm"
+            style="border-top: 4px solid var(--status-success);">
+            <div class="analytics-icon icon-success z-1">
+                <i class="bi bi-emoji-smile"></i>
+            </div>
+            <div class="z-1 w-100">
+                <p class="analytics-title fw-semibold">Satisfaction Rate</p>
+                <div class="d-flex justify-content-between align-items-baseline mt-1">
+                    <h4 class="analytics-value mb-0">98%</h4>
+                    <span class="badge bg-success bg-opacity-10 text-success rounded-pill"
+                        style="font-size: 0.75rem;"><i class="bi bi-arrow-up me-1"></i>Excellent</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="hms-card h-100">
+            <h5 class="mb-4">Upcoming Appointments</h5>
+            {% if upcoming_appointments %}
+            <div class="d-flex flex-column gap-3">
+                {% for appt in upcoming_appointments %}
+                <div class="d-flex align-items-center p-3 bg-white rounded position-relative shadow-sm"
+                    style="border: 1px solid var(--border-color); border-left: 4px solid var(--primary-blue); transition: all 0.3s ease; cursor: pointer;"
+                    onmouseover="this.style.transform='translateX(5px)'; this.style.boxShadow='0 8px 15px rgba(0,0,0,0.05)';"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)';">
+                    <div class="position-relative me-3">
+                        <div class="bg-primary bg-gradient text-white rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm"
+                            style="width: 50px; height: 50px; font-size: 1.3rem;">
+                            {{ appt.patient_name[0]|upper }}
+                        </div>
+                        <span class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle"
+                            style="width: 14px; height: 14px; padding: 0;"></span>
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1 fw-bold text-dark">{{ appt.patient_name }}</h6>
+                        <div class="d-flex align-items-center text-muted small">
+                            <i class="bi bi-stethoscope me-1 text-primary"></i> <span class="fw-medium">{{
+                                appt.doctor.name }}</span>
+                        </div>
+                    </div>
+                    <div class="text-end border-start ps-3 ms-2">
+                        <div class="fw-bold text-dark mb-1" style="font-size: 0.9rem;"><i
+                                class="bi bi-calendar3 me-1 text-secondary"></i> {{ appt.appointment_date.strftime('%b
+                            %d') }}</div>
+                        <div class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1 fw-semibold"><i
+                                class="bi bi-clock me-1"></i>{{ appt.time_slot }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-muted">No upcoming appointments scheduled.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="hms-card h-100">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="mb-0">Recently Booked Patients</h5>
+                <a href="{{ url_for('booking') }}"
+                    class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-semibold">New Booking</a>
+            </div>
+
+            {% if recent_patients %}
+            <div class="position-relative mt-2">
+                <!-- Vertical Timeline Line -->
+                <div class="position-absolute h-100 border-start"
+                    style="left: 20px; top: 0; border-color: #E2E8F0 !important;"></div>
+
+                <div class="d-flex flex-column gap-4">
+                    {% for patient in recent_patients %}
+                    <div class="d-flex align-items-start position-relative z-1"
+                        style="transition: all 0.3s ease; cursor: pointer;"
+                        onmouseover="this.querySelector('.timeline-card').style.borderColor='var(--primary-blue)'; this.querySelector('.timeline-card').style.boxShadow='0 8px 16px rgba(14, 165, 233, 0.08)';"
+                        onmouseout="this.querySelector('.timeline-card').style.borderColor='var(--border-color)'; this.querySelector('.timeline-card').style.boxShadow='0 2px 4px rgba(0,0,0,0.02)';">
+
+                        <!-- Timeline Node -->
+                        <div class="bg-white rounded-circle d-flex align-items-center justify-content-center me-3 shadow-sm"
+                            style="width: 42px; height: 42px; flex-shrink: 0; border: 3px solid var(--primary-blue); margin-top: 2px;">
+                            <i class="bi bi-person-check-fill text-primary" style="font-size: 1.1rem;"></i>
+                        </div>
+
+                        <!-- Timeline Content Card -->
+                        <div class="timeline-card flex-grow-1 bg-white p-3 rounded position-relative"
+                            style="border: 1px solid var(--border-color); box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: all 0.3s ease;">
+                            <!-- Speech bubble pointer -->
+                            <div class="timeline-pointer"
+                                style="position: absolute; left: -6px; top: 18px; width: 10px; height: 10px; background-color: white; border-left: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); transform: rotate(45deg); z-index: -1;">
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0 fw-bold text-dark">{{ patient.patient_name }}</h6>
+                                <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill px-2 py-1"
+                                    style="font-size: 0.7rem;"><i
+                                        class="bi bi-lightning-charge-fill me-1 text-warning"></i>Just now</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-end mt-1">
+                                <div class="text-muted small lh-sm">
+                                    Booked session with <br>
+                                    <span class="fw-semibold text-dark d-inline-block mt-1"><i
+                                            class="bi bi-heart-pulse text-danger me-1"></i>{{ patient.doctor.name
+                                        }}</span>
+                                </div>
+                                <span
+                                    class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1 fw-semibold shadow-sm border border-success border-opacity-25"><i
+                                        class="bi bi-clock me-1"></i>{{ patient.time_slot }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <p class="text-muted">No recent bookings found.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

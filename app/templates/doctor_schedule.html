@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ doctor.name }}'s Schedule - New Life Multispecialty Hospital{% endblock %}
+
+{% block content %}
+{% set spec = doctor.specialization.lower() %}
+{% set theme_color = 'var(--primary-blue)' %}
+{% set theme_grad = 'linear-gradient(135deg, var(--primary-blue), var(--secondary-teal))' %}
+
+{% if 'cardio' in spec %}
+{% set icon_class = 'bi-heart-pulse' %}
+{% elif 'neuro' in spec %}
+{% set icon_class = 'bi-activity' %}
+{% elif 'pedia' in spec %}
+{% set icon_class = 'bi-emoji-smile' %}
+{% elif 'ortho' in spec %}
+{% set icon_class = 'bi-file-medical' %}
+{% elif 'derma' in spec %}
+{% set icon_class = 'bi-bandaid' %}
+{% else %}
+{% set icon_class = 'bi-hospital' %}
+{% endif %}
+
+{% set cover_attr = 'style="height: 120px; background: ' ~ theme_grad ~ ';"' %}
+{% set avatar_attr = 'style="font-size: 3rem; font-family: \'Inter\', sans-serif; background: ' ~ theme_grad ~ ';"' %}
+{% set badge_attr = 'style="background-color: color-mix(in srgb, ' ~ theme_color ~ ' 8%, white); color: ' ~ theme_color
+~ '; border-color: color-mix(in srgb, ' ~ theme_color ~ ' 15%, white) !important; font-size: 0.85rem; letter-spacing:
+0.5px;"' %}
+
+<div class="row g-4">
+    <!-- Doctor Sidebar -->
+    <div class="col-lg-4">
+        <div class="hms-card text-center sticky-top p-0 border-0 overflow-hidden"
+            style="top: 100px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+            <!-- Gradient Cover -->
+            <div class="w-100 position-relative overflow-hidden" {{ cover_attr|safe }}>
+                <!-- Decorative radial glow -->
+                <div class="position-absolute w-100 h-100"
+                    style="background: radial-gradient(circle at top right, rgba(255,255,255,0.2) 0%, transparent 60%); top: 0; left: 0;">
+                </div>
+                <i class="bi {{ icon_class }} position-absolute text-white"
+                    style="font-size: 8rem; top: -20px; right: -20px; opacity: 0.15; transform: rotate(15deg);"></i>
+            </div>
+
+            <div class="text-center" style="margin-top: -55px; position: relative; z-index: 2;">
+                <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center p-1"
+                    style="width: 110px; height: 110px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15);">
+                    <div class="text-white rounded-circle d-flex align-items-center justify-content-center w-100 h-100 fw-bolder"
+                        {{ avatar_attr|safe }}>
+                        {{ doctor.name.split(' ')[-1][0]|upper if ' ' in doctor.name else doctor.name[0]|upper }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-4 bg-white" style="position: relative; z-index: 1;">
+                <h4 class="mb-2 fw-bold text-dark" style="font-family: 'Inter', sans-serif;">{{ doctor.name }}</h4>
+                <div class="rounded-pill mb-4 px-3 py-1 fw-bold border text-uppercase d-inline-block" {{ badge_attr|safe
+                    }}>
+                    <i class="bi {{ icon_class }} me-1"></i>{{ doctor.specialization }}
+                </div>
+
+                <hr class="my-4" style="opacity: 0.1;">
+
+                <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded"
+                    style="border: 1px dashed var(--border-color);">
+                    <span class="text-muted fw-semibold">Total Appointments</span>
+                    {% set total_badge_attr = 'style="background-color: ' ~ theme_color ~ ';"' %}
+                    <span class="badge rounded-pill fs-6 px-3 shadow-sm text-white" {{ total_badge_attr|safe }}>{{
+                        appointments|length }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Doctors Navigation -->
+        <div class="hms-card border-0 shadow-sm mt-4 p-3 sticky-top" style="top: 450px; border-radius: 16px;">
+            <h6 class="fw-bold mb-3 text-secondary"><i class="bi bi-people me-2"></i>Other Doctors</h6>
+            <div class="d-flex flex-column gap-2">
+                {% for d in all_doctors %}
+                {% if d.id != doctor.id %}
+                <a href="{{ url_for('doctor_schedule', doctor_id=d.id) }}"
+                    class="btn btn-light text-start text-dark shadow-sm border transition-all"
+                    style="border-radius: 10px; text-decoration: none;"
+                    onmouseover="this.style.backgroundColor='#f8fafc'; this.style.borderColor='var(--primary-blue)';"
+                    onmouseout="this.style.backgroundColor=''; this.style.borderColor='';">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center me-2 flex-shrink-0"
+                            style="width: 35px; height: 35px;">
+                            <i class="bi bi-person-badge fs-6"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold fs-6">{{ d.name }}</div>
+                            <small class="text-muted" style="font-size: 0.75rem;">{{ d.specialization }}</small>
+                        </div>
+                    </div>
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Table -->
+    <div class="col-lg-8">
+        <div class="hms-card border-0 shadow-sm" style="border-radius: 16px;">
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                <h4 class="mb-0 fw-bold text-dark"><i class="bi bi-calendar-range me-2 text-primary"></i>Schedule
+                    Overview</h4>
+                <a href="{{ url_for('doctors_list') }}"
+                    class="btn btn-outline-secondary rounded-pill btn-sm px-3 fw-semibold"><i
+                        class="bi bi-arrow-left me-1"></i> Back to Doctors</a>
+            </div>
+
+            {% if appointments %}
+            <div class="d-flex flex-column gap-3">
+                {% set card_attr = 'style="border: 1px solid var(--border-color); border-left: 4px solid ' ~ theme_color
+                ~ '; transition: all 0.3s ease; cursor: default;" onmouseover="this.style.transform=\'translateX(5px)\';
+                this.style.boxShadow=\'0 8px 15px rgba(0,0,0,0.05)\';"
+                onmouseout="this.style.transform=\'translateX(0)\'; this.style.boxShadow=\'0 2px 4px
+                rgba(0,0,0,0.05)\';"' %}
+                {% for appt in appointments %}
+                <div class="d-flex align-items-center p-3 bg-white rounded position-relative shadow-sm" {{
+                    card_attr|safe }}>
+                    <div class="position-relative me-4">
+                        <div class="bg-success bg-opacity-10 text-success rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm border border-success border-opacity-25"
+                            style="width: 50px; height: 50px; font-size: 1.3rem;">
+                            {{ appt.patient_name[0]|upper }}
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1 fw-bold text-dark">{{ appt.patient_name }}</h6>
+                        <div class="d-flex align-items-center text-muted small">
+                            <i class="bi bi-hash me-1 text-secondary"></i> <span class="fw-medium">Patient ID: #{{
+                                appt.id }}</span>
+                        </div>
+                    </div>
+                    <div class="text-end border-start ps-4 ms-2">
+                        <div class="fw-bold text-dark mb-1" style="font-size: 0.95rem;"><i
+                                class="bi bi-calendar3 me-1 text-secondary"></i> {{ appt.appointment_date.strftime('%B
+                            %d, %Y') }}</div>
+                        <div class="d-flex justify-content-end align-items-center gap-2 mt-2">
+                            <div
+                                class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill px-3 py-1 fw-semibold">
+                                <i class="bi bi-clock me-1"></i>{{ appt.time_slot }}</div>
+                            {% if appt.status == 'Scheduled' %}
+                            <span class="badge bg-success bg-gradient rounded-pill px-3 py-1 shadow-sm"><i
+                                    class="bi bi-calendar-event me-1"></i>{{ appt.status }}</span>
+                            {% else %}
+                            <span class="badge bg-secondary rounded-pill px-3 py-1">{{ appt.status }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center p-5 bg-light rounded border border-dashed text-muted">
+                <i class="bi bi-calendar-x fs-1 mb-3 text-secondary opacity-50"></i>
+                <p class="mb-0 fw-medium fs-5">No appointments scheduled.</p>
+                <p class="small mt-2">This doctor currently has a free schedule.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,1142 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - New Life Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: url("{{ url_for('static', filename='img/hospital_bg.png') }}") no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(245, 248, 250, 0.35);
+        z-index: -2;
+    }
+
+    /* Section cards — subtle glassmorphism to show focused background */
+    .section-card {
+        background: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.7) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+    }
+</style>
+
+<!-- 1. World-Class Hero Section for New Life Hospital -->
+<div class="row align-items-center my-3 py-lg-4 position-relative z-1 g-5 font-poppins">
+    <!-- Left Column: Content, Buttons, Trust Features, Statistics -->
+    <div class="col-lg-6 mb-5 mb-lg-0 text-start">
+        <!-- Badge -->
+        <div class="d-inline-flex align-items-center gap-2 rounded-pill px-3.5 py-1.5 mb-4 shadow-sm" style="background: rgba(15, 76, 129, 0.08); border: 1px solid rgba(15, 76, 129, 0.2);">
+            <span class="fs-6">🏥</span>
+            <span class="fw-semibold" style="color: #0F4C81; font-size: 0.9rem; letter-spacing: -0.2px;">Trusted by 100,000+ Patients</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="hero-headline mb-4">
+            Exceptional Healthcare,<br>
+            <span class="gradient-text-compassion">Compassionate Care</span><br>
+            for Every Generation.
+        </h1>
+
+        <!-- Description -->
+        <p class="mb-4 pb-2" style="color: #2C3E50; font-size: 1.05rem; line-height: 1.75; font-weight: 400; max-width: 95%;">
+            At New Life Hospital, we combine advanced medical technology with compassionate healthcare to provide exceptional treatment for every patient. Our experienced specialists deliver personalized care with excellence, innovation, and trust.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="d-flex flex-wrap gap-3 mb-5">
+            <a href="{{ url_for('booking') }}" class="btn-hero-primary d-inline-flex align-items-center">
+                <i class="bi bi-calendar-check me-2 fs-5"></i> Book Appointment
+            </a>
+            <a href="{{ url_for('doctors_list') }}" class="btn-hero-secondary d-inline-flex align-items-center">
+                <i class="bi bi-person-badge me-2 fs-5"></i> Find a Doctor
+            </a>
+        </div>
+
+        <!-- Trust Features Grid (6 Checkmarks) -->
+        <div class="row g-3 mb-5 pt-2 border-top border-bottom py-4" style="border-color: rgba(226, 232, 240, 0.8) !important;">
+            <div class="col-6 col-sm-4">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-6"></i>
+                    <span class="fw-medium text-dark" style="font-size: 0.88rem;">24/7 Emergency Care</span>
+                </div>
+            </div>
+            <div class="col-6 col-sm-4">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-6"></i>
+                    <span class="fw-medium text-dark" style="font-size: 0.88rem;">Expert Specialists</span>
+                </div>
+            </div>
+            <div class="col-6 col-sm-4">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-6"></i>
+                    <span class="fw-medium text-dark" style="font-size: 0.88rem;">NABH Accredited</span>
+                </div>
+            </div>
+            <div class="col-6 col-sm-4">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-6"></i>
+                    <span class="fw-medium text-dark" style="font-size: 0.88rem;">Cashless Insurance</span>
+                </div>
+            </div>
+            <div class="col-6 col-sm-4">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-6"></i>
+                    <span class="fw-medium text-dark" style="font-size: 0.88rem;">Digital Health Records</span>
+                </div>
+            </div>
+            <div class="col-6 col-sm-4">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-6"></i>
+                    <span class="fw-medium text-dark" style="font-size: 0.88rem;">Modern Technology</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hospital Statistics -->
+        <div class="d-flex flex-wrap align-items-center gap-4">
+            <div class="stat-box ps-0">
+                <h3 class="fw-bold mb-0" style="color: #0F4C81; font-size: 2.2rem; font-family: 'Poppins', sans-serif;">150+</h3>
+                <span class="text-secondary small fw-medium">Expert Doctors</span>
+            </div>
+            <div class="stat-box">
+                <h3 class="fw-bold mb-0" style="color: #0F4C81; font-size: 2.2rem; font-family: 'Poppins', sans-serif;">50+</h3>
+                <span class="text-secondary small fw-medium">Departments</span>
+            </div>
+            <div class="stat-box">
+                <h3 class="fw-bold mb-0" style="color: #0F4C81; font-size: 2.2rem; font-family: 'Poppins', sans-serif;">100K+</h3>
+                <span class="text-secondary small fw-medium">Happy Patients</span>
+            </div>
+            <div class="stat-box pe-0 border-0">
+                <h3 class="fw-bold mb-0" style="color: #0F4C81; font-size: 2.2rem; font-family: 'Poppins', sans-serif;">25+</h3>
+                <span class="text-secondary small fw-medium">Years Experience</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Premium Image Showcase & Floating Cards -->
+    <div class="col-lg-6 position-relative">
+        <div class="position-relative mx-auto" style="max-width: 580px;">
+            <!-- Main Hero Image Frame with Dark Overlay -->
+            <div class="position-relative overflow-hidden shadow-lg" style="border-radius: 24px; border: 4px solid #FFFFFF;">
+                <img src="{{ url_for('static', filename='img/facility_emergency.png') }}" alt="New Life Hospital Interior" class="w-100 object-fit-cover transition-all" style="height: 520px; transform: scale(1.02);">
+                <!-- Dark Blue Overlay (rgba(15,76,129,0.35)) -->
+                <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(15, 76, 129, 0.35); pointer-events: none;"></div>
+                
+                <!-- Inner Gradient Accent -->
+                <div class="position-absolute bottom-0 start-0 w-100 p-4" style="background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, transparent 100%);">
+                    <span class="badge bg-success rounded-pill px-3 py-1 mb-2 fw-semibold" style="font-size: 0.78rem;">Live Consultation Active</span>
+                    <h5 class="text-white fw-bold mb-0">World-Class Healthcare Facility</h5>
+                </div>
+            </div>
+
+            <!-- Floating Card 1: Experience Badge (Top Left) -->
+            <div class="position-absolute top-0 start-0 translate-middle-y ms-n3 floating-card-1 z-2" style="margin-top: 40px;">
+                <div class="glass-card-hero p-3 d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 48px; height: 48px; background: linear-gradient(135deg, #0F4C81, #2E8B57); font-size: 1.25rem;">
+                        ⭐
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-0 text-dark" style="font-size: 0.95rem;">25+ Years</h6>
+                        <span class="text-secondary small fw-medium" style="font-size: 0.78rem;">Medical Excellence</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Card 2: Appointment Card (Top Right) -->
+            <div class="position-absolute top-50 end-0 translate-middle-y me-n3 floating-card-2 z-2" style="margin-top: -60px;">
+                <div class="glass-card-hero p-3.5 shadow-lg" style="width: 260px;">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="fw-bold text-dark" style="font-size: 0.9rem;"><i class="bi bi-calendar2-event text-primary me-1.5"></i> Book Appointment</span>
+                        <span class="badge bg-primary rounded-pill px-2 py-0.5" style="font-size: 0.68rem;">Instant</span>
+                    </div>
+                    <div class="bg-white rounded-3 p-2 mb-2 border text-start">
+                        <span class="text-muted d-block" style="font-size: 0.72rem;">Select Doctor</span>
+                        <span class="fw-medium text-dark d-block text-truncate" style="font-size: 0.82rem;">Dr. Sarah Jenkins (Cardiology)</span>
+                    </div>
+                    <div class="bg-white rounded-3 p-2 mb-2.5 border text-start">
+                        <span class="text-muted d-block" style="font-size: 0.72rem;">Choose Date</span>
+                        <span class="fw-medium text-dark d-block" style="font-size: 0.82rem;"><i class="bi bi-clock me-1 text-success"></i> Today, 04:30 PM</span>
+                    </div>
+                    <a href="{{ url_for('booking') }}" class="btn btn-primary btn-sm w-100 rounded-pill fw-bold py-1.5" style="background-color: #0F4C81; border: none; font-size: 0.82rem;">Book Now</a>
+                </div>
+            </div>
+
+            <!-- Floating Card 3: Emergency Card (Bottom Left) -->
+            <div class="position-absolute bottom-0 start-0 translate-middle-y ms-n2 floating-card-3 z-2" style="margin-bottom: 20px;">
+                <div class="glass-card-hero p-3 shadow-lg d-flex align-items-center gap-3" style="border-left: 4px solid #DC2626;">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 44px; height: 44px; background: #DC2626; font-size: 1.1rem;">
+                        <i class="bi bi-telephone-outbound-fill"></i>
+                    </div>
+                    <div>
+                        <span class="fw-bold d-block text-dark" style="font-size: 0.85rem;">24/7 Emergency</span>
+                        <span class="fw-bold text-danger d-block" style="font-size: 1rem; letter-spacing: -0.2px;">+91 1800 000 000</span>
+                        <span class="text-muted d-block" style="font-size: 0.72rem;">Always Available</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 3. Centers of Excellence (Departments Section) -->
+<div class="row my-5 py-3">
+    <div class="col-12 position-relative overflow-hidden p-0" style="background: transparent; border: none; box-shadow: none;">
+        <!-- Decorative light orbs -->
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 80% 70%, rgba(20, 184, 166, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+
+        <div class="position-relative z-1 py-4">
+            <div class="text-center mb-5">
+                <span class="badge badge-sky-teal rounded-pill px-3 py-1 fw-bold mb-3" style="letter-spacing: 1px;">
+                    <i class="bi bi-star-fill me-1"></i> Centers of Excellence
+                </span>
+                <h2 class="fw-bold text-dark display-5 mb-3" style="font-family: 'Playfair Display', serif;">Our Specialized Departments</h2>
+                <p class="text-secondary mx-auto mt-3" style="max-width: 650px; font-size: 1.1rem;">
+                    We provide comprehensive healthcare services across various medical specialties, equipped with state-of-the-art technology and world-class specialists.
+                </p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <!-- Cardiology -->
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="text-start h-100 p-4 border shadow-sm transition-all position-relative overflow-hidden set-bg" data-bg="{{ url_for('static', filename='img/dept_cardiology.png') }}" style="border-radius: 20px; border-color: rgba(255, 255, 255, 0.15) !important; cursor: pointer; min-height: 240px; background-size: cover; background-position: center center;" onclick="window.location.href=this.getAttribute('data-url');" data-url="{{ url_for('departments') }}" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 .125rem .25rem rgba(0,0,0,.075)';">
+                        <div class="position-absolute bottom-0 start-0 w-100 h-100" style="background: linear-gradient(to top, rgba(16,36,23,0.95) 0%, rgba(16,36,23,0.2) 60%, transparent 100%); z-index: 0;"></div>
+                        <div class="position-relative z-1 d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <div class="bg-white bg-opacity-25 text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 50px; height: 50px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);">
+                                    <i class="bi bi-heart-pulse fs-4"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4">
+                                <h4 class="fw-bold text-white mb-1 fs-5">Cardiology</h4>
+                                <p class="text-white opacity-75 small mb-0 lh-sm" style="font-size: 0.88rem;">Advanced Heart Care & Diagnostics</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neurology -->
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="text-start h-100 p-4 border shadow-sm transition-all position-relative overflow-hidden set-bg" data-bg="{{ url_for('static', filename='img/dept_neurology.png') }}" style="border-radius: 20px; border-color: rgba(255, 255, 255, 0.15) !important; cursor: pointer; min-height: 240px; background-size: cover; background-position: center center;" onclick="window.location.href=this.getAttribute('data-url');" data-url="{{ url_for('departments') }}" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 .125rem .25rem rgba(0,0,0,.075)';">
+                        <div class="position-absolute bottom-0 start-0 w-100 h-100" style="background: linear-gradient(to top, rgba(16,36,23,0.95) 0%, rgba(16,36,23,0.2) 60%, transparent 100%); z-index: 0;"></div>
+                        <div class="position-relative z-1 d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <div class="bg-white bg-opacity-25 text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 50px; height: 50px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);">
+                                    <i class="bi bi-activity fs-4"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4">
+                                <h4 class="fw-bold text-white mb-1 fs-5">Neurology</h4>
+                                <p class="text-white opacity-75 small mb-0 lh-sm" style="font-size: 0.88rem;">Comprehensive Brain & Spine Treatment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pediatrics -->
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="text-start h-100 p-4 border shadow-sm transition-all position-relative overflow-hidden set-bg" data-bg="{{ url_for('static', filename='img/dept_pediatrics.png') }}" style="border-radius: 20px; border-color: rgba(255, 255, 255, 0.15) !important; cursor: pointer; min-height: 240px; background-size: cover; background-position: center center;" onclick="window.location.href=this.getAttribute('data-url');" data-url="{{ url_for('departments') }}" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 .125rem .25rem rgba(0,0,0,.075)';">
+                        <div class="position-absolute bottom-0 start-0 w-100 h-100" style="background: linear-gradient(to top, rgba(16,36,23,0.95) 0%, rgba(16,36,23,0.2) 60%, transparent 100%); z-index: 0;"></div>
+                        <div class="position-relative z-1 d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <div class="bg-white bg-opacity-25 text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 50px; height: 50px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);">
+                                    <i class="bi bi-emoji-smile fs-4"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4">
+                                <h4 class="fw-bold text-white mb-1 fs-5">Pediatrics</h4>
+                                <p class="text-white opacity-75 small mb-0 lh-sm" style="font-size: 0.88rem;">Specialized Child Healthcare</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orthopedics -->
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="text-start h-100 p-4 border shadow-sm transition-all position-relative overflow-hidden set-bg" data-bg="{{ url_for('static', filename='img/dept_orthopedics.png') }}" style="border-radius: 20px; border-color: rgba(255, 255, 255, 0.15) !important; cursor: pointer; min-height: 240px; background-size: cover; background-position: center center;" onclick="window.location.href=this.getAttribute('data-url');" data-url="{{ url_for('departments') }}" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 .125rem .25rem rgba(0,0,0,.075)';">
+                        <div class="position-absolute bottom-0 start-0 w-100 h-100" style="background: linear-gradient(to top, rgba(16,36,23,0.95) 0%, rgba(16,36,23,0.2) 60%, transparent 100%); z-index: 0;"></div>
+                        <div class="position-relative z-1 d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <div class="bg-white bg-opacity-25 text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 50px; height: 50px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);">
+                                    <i class="bi bi-bandaid fs-4"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4">
+                                <h4 class="fw-bold text-white mb-1 fs-5">Orthopedics</h4>
+                                <p class="text-white opacity-75 small mb-0 lh-sm" style="font-size: 0.88rem;">Bone, Joint & Trauma Care</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dermatology -->
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="text-start h-100 p-4 border shadow-sm transition-all position-relative overflow-hidden set-bg" data-bg="{{ url_for('static', filename='img/dept_dermatology.png') }}" style="border-radius: 20px; border-color: rgba(255, 255, 255, 0.15) !important; cursor: pointer; min-height: 240px; background-size: cover; background-position: center center;" onclick="window.location.href=this.getAttribute('data-url');" data-url="{{ url_for('departments') }}" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 .125rem .25rem rgba(0,0,0,.075)';">
+                        <div class="position-absolute bottom-0 start-0 w-100 h-100" style="background: linear-gradient(to top, rgba(16,36,23,0.95) 0%, rgba(16,36,23,0.2) 60%, transparent 100%); z-index: 0;"></div>
+                        <div class="position-relative z-1 d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <div class="bg-white bg-opacity-25 text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 50px; height: 50px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);">
+                                    <i class="bi bi-person fs-4"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4">
+                                <h4 class="fw-bold text-white mb-1 fs-5">Dermatology</h4>
+                                <p class="text-white opacity-75 small mb-0 lh-sm" style="font-size: 0.88rem;">Advanced Skin Treatment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Laboratory -->
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="text-start h-100 p-4 border shadow-sm transition-all position-relative overflow-hidden set-bg" data-bg="{{ url_for('static', filename='img/dept_laboratory.png') }}" style="border-radius: 20px; border-color: rgba(255, 255, 255, 0.15) !important; cursor: pointer; min-height: 240px; background-size: cover; background-position: center center;" onclick="window.location.href=this.getAttribute('data-url');" data-url="{{ url_for('departments') }}" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 .125rem .25rem rgba(0,0,0,.075)';">
+                        <div class="position-absolute bottom-0 start-0 w-100 h-100" style="background: linear-gradient(to top, rgba(16,36,23,0.95) 0%, rgba(16,36,23,0.2) 60%, transparent 100%); z-index: 0;"></div>
+                        <div class="position-relative z-1 d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <div class="bg-white bg-opacity-25 text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 50px; height: 50px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);">
+                                    <i class="bi bi-eyedropper fs-4"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4">
+                                <h4 class="fw-bold text-white mb-1 fs-5">Laboratory</h4>
+                                <p class="text-white opacity-75 small mb-0 lh-sm" style="font-size: 0.88rem;">24/7 Rapid Testing & Diagnostics</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{{ url_for('departments') }}" class="btn rounded-pill px-5 py-3 fw-bold text-white shadow-sm transition-all" style="background: linear-gradient(135deg, #0EA5E9, #14B8A6); border: none; box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);">
+                    View All Departments <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 4. Our Services & Healthcare Solutions (Services Highlights) -->
+<div class="row my-5 py-3">
+    <div class="col-12">
+        <div class="position-relative overflow-hidden p-4 p-md-5" style="border-radius: 32px; background: transparent; border: none; box-shadow: none;">
+            <!-- Decorative Gradient Orbs -->
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 80% 70%, rgba(20, 184, 166, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+
+            <div class="position-relative z-1">
+                <div class="text-center mb-5">
+                    <span class="badge badge-sky-teal rounded-pill px-3 py-1 fw-bold mb-3" style="letter-spacing: 1px;">
+                        <i class="bi bi-grid-fill me-1"></i> Our Services
+                    </span>
+                    <h2 class="fw-bold text-dark display-5 mb-3" style="font-family: 'Playfair Display', serif;">Comprehensive Healthcare Solutions</h2>
+                    <p class="text-secondary mx-auto" style="max-width: 650px; font-size: 1.1rem;">
+                        From preventive care to specialized digital diagnostics, we offer a full spectrum of medical services to meet all your health needs.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Service 1 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card h-100 p-4 rounded-4 transition-all position-relative overflow-hidden" style="background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 12px rgba(14, 165, 233, 0.06);">
+                            <div class="service-icon-wrapper mb-3">
+                                <i class="bi bi-calendar-check"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">Online Appointments</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Book appointments online 24/7 with real-time availability and instant specialist confirmation.</p>
+                            <div class="position-absolute bottom-0 end-0 w-32 h-32 rounded-circle" style="background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%); transform: translate(30%, 30%); pointer-events: none;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card h-100 p-4 rounded-4 transition-all position-relative overflow-hidden" style="background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 12px rgba(14, 165, 233, 0.06);">
+                            <div class="service-icon-wrapper service-icon-emerald mb-3">
+                                <i class="bi bi-prescription2"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">E-Prescriptions</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Digital prescriptions sent directly to your preferred pharmacy for quick and convenient pickup.</p>
+                            <div class="position-absolute bottom-0 end-0 w-32 h-32 rounded-circle" style="background: radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 70%); transform: translate(30%, 30%); pointer-events: none;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card h-100 p-4 rounded-4 transition-all position-relative overflow-hidden" style="background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 12px rgba(14, 165, 233, 0.06);">
+                            <div class="service-icon-wrapper service-icon-purple mb-3">
+                                <i class="bi bi-file-earmark-medical"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">Lab Results Online</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Access your lab test results securely online as soon as they are available with doctor notes.</p>
+                            <div class="position-absolute bottom-0 end-0 w-32 h-32 rounded-circle" style="background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%); transform: translate(30%, 30%); pointer-events: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 8. Why Choose Us (Advanced Features/Reasons Section) -->
+<div class="row my-5 py-3">
+    <div class="col-12">
+        <div class="position-relative overflow-hidden p-4 p-md-5" style="border-radius: 32px; background: transparent; border: none; box-shadow: none;">
+            <!-- Decorative Elements -->
+            <div class="position-absolute top-0 end-0 w-64 h-64 rounded-circle" style="background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%); transform: translate(30%, -30%); pointer-events: none;"></div>
+            <div class="position-absolute bottom-0 start-0 w-80 h-80 rounded-circle" style="background: radial-gradient(circle, rgba(20, 184, 166, 0.06) 0%, transparent 70%); transform: translate(-30%, 30%); pointer-events: none;"></div>
+
+            <div class="position-relative z-1">
+                <div class="text-center mb-5">
+                    <span class="badge badge-sky-teal rounded-pill px-3 py-1 fw-bold mb-3" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(20, 184, 166, 0.15) 100%) !important; color: #0EA5E9 !important; border: 1px solid rgba(14, 165, 233, 0.4) !important; letter-spacing: 1px;">
+                        <i class="bi bi-check-circle-fill me-1"></i> Why Choose Us
+                    </span>
+                    <h2 class="fw-bold text-dark display-5 mb-3" style="font-family: 'Playfair Display', serif;">Excellence in Healthcare</h2>
+                    <p class="text-secondary mx-auto" style="max-width: 650px; font-size: 1.1rem;">
+                        We combine cutting-edge technology with compassionate care to deliver the best medical outcomes for our patients.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Benefit 1 -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card h-100 p-4 rounded-4 transition-all" style="background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 12px rgba(14, 165, 233, 0.06);">
+                            <div class="benefit-icon mb-3">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">Expert Specialists</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Board-certified doctors with years of specialized experience in their respective medical fields.</p>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 2 -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card h-100 p-4 rounded-4 transition-all" style="background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 12px rgba(14, 165, 233, 0.06);">
+                            <div class="benefit-icon benefit-icon-emerald mb-3">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">24/7 Availability</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Round-the-clock emergency services and support for all your urgent medical needs.</p>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 3 -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card h-100 p-4 rounded-4 transition-all" style="background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 12px rgba(14, 165, 233, 0.06);">
+                            <div class="benefit-icon benefit-icon-purple mb-3">
+                                <i class="bi bi-laptop"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">Digital Health Records</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Secure online access to your complete medical history and test results anywhere, anytime.</p>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 4 -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card h-100 p-4 rounded-4 transition-all" style="background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 12px rgba(14, 165, 233, 0.06);">
+                            <div class="benefit-icon benefit-icon-amber mb-3">
+                                <i class="bi bi-heart-pulse"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">Comprehensive Care</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Personalized treatment plans tailored to your unique health requirements and well-being.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 6. Meet Our Specialists (Doctors Team Section) -->
+<div class="row my-5 py-3">
+    <div class="col-12">
+        <div class="position-relative overflow-hidden p-4 p-md-5" style="border-radius: 40px; background: transparent; border: none; box-shadow: none;">
+            <!-- Decorative Subtle Background Elements -->
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 80% 70%, rgba(20, 184, 166, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+
+            <div class="position-relative z-1">
+                <div class="text-center mb-5">
+                    <span class="badge badge-sky-teal rounded-pill px-4 py-2 fw-bold mb-4 shadow-sm" style="letter-spacing: 2px;">
+                        <i class="bi bi-stars me-2"></i> Expert Medical Team
+                    </span>
+                    <h2 class="fw-bold text-dark display-4 mb-4" style="font-family: 'Playfair Display', serif;">
+                        Meet Our Specialists
+                    </h2>
+                    <p class="text-secondary mx-auto" style="max-width: 700px; font-size: 1.15rem; line-height: 1.8;">
+                        Our team of world-renowned specialists combines cutting-edge expertise with compassionate care to deliver exceptional healthcare outcomes.
+                    </p>
+                </div>
+
+                <div class="row g-5">
+                    <!-- Doctor 1 -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="doctor-card-advanced h-100 position-relative overflow-hidden rounded-4" style="background: rgba(255, 255, 255, 0.80); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 6px 20px rgba(0,0,0,0.06); transition: all 0.4s ease;">
+                            <div class="doctor-image-wrapper-advanced position-relative">
+                                <div class="doctor-placeholder-advanced d-flex align-items-center justify-content-center position-relative" style="height: 240px; background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);">
+                                    <div class="text-center text-white position-relative z-1">
+                                        <div class="position-relative mb-3">
+                                            <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 3px solid rgba(255,255,255,0.4); box-shadow: 0 0 30px rgba(255,255,255,0.2);">
+                                                <span class="fw-bold" style="font-size: 2.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.15);">SJ</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="position-absolute top-4 end-4 bg-white rounded-pill px-3 py-1.5 d-flex align-items-center shadow" style="font-size: 0.8rem;">
+                                    <i class="bi bi-star-fill text-warning me-1"></i>
+                                    <span class="fw-bold text-dark">4.9</span>
+                                    <span class="text-muted small ms-1">(128)</span>
+                                </div>
+                            </div>
+                            <div class="p-4 text-center position-relative z-1">
+                                <h5 class="fw-bold text-dark mb-2" style="font-size: 1.1rem;">Dr. Sarah Johnson</h5>
+                                <p class="fw-semibold mb-3" style="color: #0EA5E9; font-size: 0.9rem;">Senior Cardiologist</p>
+                                <p class="text-secondary mb-4" style="font-size: 0.85rem; line-height: 1.5;">Specialist in interventional cardiology & heart care</p>
+                                <div class="d-flex justify-content-center gap-2 mb-4">
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(14, 165, 233, 0.1); color: #0EA5E9; border: 1px solid rgba(14, 165, 233, 0.25); font-size: 0.7rem;">MD</span>
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(14, 165, 233, 0.1); color: #0EA5E9; border: 1px solid rgba(14, 165, 233, 0.25); font-size: 0.7rem;">FACC</span>
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(14, 165, 233, 0.1); color: #0EA5E9; border: 1px solid rgba(14, 165, 233, 0.25); font-size: 0.7rem;">15+ Yrs</span>
+                                </div>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ url_for('booking') }}" class="btn btn-sm rounded-pill px-4 py-2 fw-semibold text-white" style="background: linear-gradient(135deg, #0EA5E9, #0284C7); border: none; box-shadow: 0 4px 15px rgba(14, 165, 233, 0.25); transition: all 0.3s;">Book Now</a>
+                                    <a href="{{ url_for('doctors_list') }}" class="btn btn-sm rounded-pill px-4 py-2 fw-semibold btn-outline-dark" style="border: 1px solid rgba(226, 232, 240, 0.9);">Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 2 -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="doctor-card-advanced h-100 position-relative overflow-hidden rounded-4" style="background: rgba(255, 255, 255, 0.80); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 6px 20px rgba(0,0,0,0.06); transition: all 0.4s ease;">
+                            <div class="doctor-image-wrapper-advanced position-relative">
+                                <div class="doctor-placeholder-advanced d-flex align-items-center justify-content-center position-relative" style="height: 240px; background: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%);">
+                                    <div class="text-center text-white position-relative z-1">
+                                        <div class="position-relative mb-3">
+                                            <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 3px solid rgba(255,255,255,0.4); box-shadow: 0 0 30px rgba(255,255,255,0.2);">
+                                                <span class="fw-bold" style="font-size: 2.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.15);">MC</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="position-absolute top-4 end-4 bg-white rounded-pill px-3 py-1.5 d-flex align-items-center shadow" style="font-size: 0.8rem;">
+                                    <i class="bi bi-star-fill text-warning me-1"></i>
+                                    <span class="fw-bold text-dark">4.8</span>
+                                    <span class="text-muted small ms-1">(96)</span>
+                                </div>
+                            </div>
+                            <div class="p-4 text-center position-relative z-1">
+                                <h5 class="fw-bold text-dark mb-2" style="font-size: 1.1rem;">Dr. Michael Chen</h5>
+                                <p class="fw-semibold mb-3" style="color: #14B8A6; font-size: 0.9rem;">Lead Neurologist</p>
+                                <p class="text-secondary mb-4" style="font-size: 0.85rem; line-height: 1.5;">Expert in neurosurgical procedures & brain health</p>
+                                <div class="d-flex justify-content-center gap-2 mb-4">
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(20, 184, 166, 0.1); color: #14B8A6; border: 1px solid rgba(20, 184, 166, 0.25); font-size: 0.7rem;">MD</span>
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(20, 184, 166, 0.1); color: #14B8A6; border: 1px solid rgba(20, 184, 166, 0.25); font-size: 0.7rem;">FAAN</span>
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(20, 184, 166, 0.1); color: #14B8A6; border: 1px solid rgba(20, 184, 166, 0.25); font-size: 0.7rem;">12+ Yrs</span>
+                                </div>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ url_for('booking') }}" class="btn btn-sm rounded-pill px-4 py-2 fw-semibold text-white" style="background: linear-gradient(135deg, #14B8A6, #0D9488); border: none; box-shadow: 0 4px 15px rgba(20, 184, 166, 0.25); transition: all 0.3s;">Book Now</a>
+                                    <a href="{{ url_for('doctors_list') }}" class="btn btn-sm rounded-pill px-4 py-2 fw-semibold btn-outline-dark" style="border: 1px solid rgba(226, 232, 240, 0.9);">Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 3 -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="doctor-card-advanced h-100 position-relative overflow-hidden rounded-4" style="background: rgba(255, 255, 255, 0.80); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 6px 20px rgba(0,0,0,0.06); transition: all 0.4s ease;">
+                            <div class="doctor-image-wrapper-advanced position-relative">
+                                <div class="doctor-placeholder-advanced d-flex align-items-center justify-content-center position-relative" style="height: 240px; background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);">
+                                    <div class="text-center text-white position-relative z-1">
+                                        <div class="position-relative mb-3">
+                                            <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 3px solid rgba(255,255,255,0.4); box-shadow: 0 0 30px rgba(255,255,255,0.2);">
+                                                <span class="fw-bold" style="font-size: 2.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.15);">ER</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="position-absolute top-4 end-4 bg-white rounded-pill px-3 py-1.5 d-flex align-items-center shadow" style="font-size: 0.8rem;">
+                                    <i class="bi bi-star-fill text-warning me-1"></i>
+                                    <span class="fw-bold text-dark">5.0</span>
+                                    <span class="text-muted small ms-1">(142)</span>
+                                </div>
+                            </div>
+                            <div class="p-4 text-center position-relative z-1">
+                                <h5 class="fw-bold text-dark mb-2" style="font-size: 1.1rem;">Dr. Emily Rodriguez</h5>
+                                <p class="fw-semibold mb-3" style="color: #0EA5E9; font-size: 0.9rem;">Chief Pediatrician</p>
+                                <p class="text-secondary mb-4" style="font-size: 0.85rem; line-height: 1.5;">Dedicated to comprehensive infant & child wellness</p>
+                                <div class="d-flex justify-content-center gap-2 mb-4">
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(14, 165, 233, 0.1); color: #0EA5E9; border: 1px solid rgba(14, 165, 233, 0.25); font-size: 0.7rem;">MD</span>
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(14, 165, 233, 0.1); color: #0EA5E9; border: 1px solid rgba(14, 165, 233, 0.25); font-size: 0.7rem;">FAAP</span>
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(14, 165, 233, 0.1); color: #0EA5E9; border: 1px solid rgba(14, 165, 233, 0.25); font-size: 0.7rem;">10+ Yrs</span>
+                                </div>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ url_for('booking') }}" class="btn btn-sm rounded-pill px-4 py-2 fw-semibold text-white" style="background: linear-gradient(135deg, #0EA5E9, #0284C7); border: none; box-shadow: 0 4px 15px rgba(14, 165, 233, 0.25); transition: all 0.3s;">Book Now</a>
+                                    <a href="{{ url_for('doctors_list') }}" class="btn btn-sm rounded-pill px-4 py-2 fw-semibold btn-outline-dark" style="border: 1px solid rgba(226, 232, 240, 0.9);">Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 4 -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="doctor-card-advanced h-100 position-relative overflow-hidden rounded-4" style="background: rgba(255, 255, 255, 0.80); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 6px 20px rgba(0,0,0,0.06); transition: all 0.4s ease;">
+                            <div class="doctor-image-wrapper-advanced position-relative">
+                                <div class="doctor-placeholder-advanced d-flex align-items-center justify-content-center position-relative" style="height: 240px; background: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%);">
+                                    <div class="text-center text-white position-relative z-1">
+                                        <div class="position-relative mb-3">
+                                            <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 3px solid rgba(255,255,255,0.4); box-shadow: 0 0 30px rgba(255,255,255,0.2);">
+                                                <span class="fw-bold" style="font-size: 2.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.15);">JA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="position-absolute top-4 end-4 bg-white rounded-pill px-3 py-1.5 d-flex align-items-center shadow" style="font-size: 0.8rem;">
+                                    <i class="bi bi-star-fill text-warning me-1"></i>
+                                    <span class="fw-bold text-dark">4.7</span>
+                                    <span class="text-muted small ms-1">(89)</span>
+                                </div>
+                            </div>
+                            <div class="p-4 text-center position-relative z-1">
+                                <h5 class="fw-bold text-dark mb-2" style="font-size: 1.1rem;">Dr. James Anderson</h5>
+                                <p class="fw-semibold mb-3" style="color: #14B8A6; font-size: 0.9rem;">Orthopedic Surgeon</p>
+                                <p class="text-secondary mb-4" style="font-size: 0.85rem; line-height: 1.5;">Specialist in advanced joint replacement & trauma surgery</p>
+                                <div class="d-flex justify-content-center gap-2 mb-4">
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(20, 184, 166, 0.1); color: #14B8A6; border: 1px solid rgba(20, 184, 166, 0.25); font-size: 0.7rem;">MBBS</span>
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(20, 184, 166, 0.1); color: #14B8A6; border: 1px solid rgba(20, 184, 166, 0.25); font-size: 0.7rem;">MS</span>
+                                    <span class="badge rounded-pill px-2 py-1" style="background: rgba(20, 184, 166, 0.1); color: #14B8A6; border: 1px solid rgba(20, 184, 166, 0.25); font-size: 0.7rem;">FAAOS</span>
+                                </div>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ url_for('booking') }}" class="btn btn-sm rounded-pill px-4 py-2 fw-semibold text-white" style="background: linear-gradient(135deg, #14B8A6, #0D9488); border: none; box-shadow: 0 4px 15px rgba(20, 184, 166, 0.25); transition: all 0.3s;">Book Now</a>
+                                    <a href="{{ url_for('doctors_list') }}" class="btn btn-sm rounded-pill px-4 py-2 fw-semibold btn-outline-dark" style="border: 1px solid rgba(226, 232, 240, 0.9);">Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-5">
+                    <a href="{{ url_for('doctors_list') }}" class="btn rounded-pill px-5 py-3 fw-bold text-white shadow-lg" style="background: linear-gradient(135deg, #0EA5E9, #14B8A6); border: none; box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4); transition: all 0.3s; font-size: 1rem;">
+                        View All Doctors <i class="bi bi-arrow-right-circle ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 7. World-Class Healthcare Infrastructure (Facilities Carousel Section) -->
+<div class="row my-5 py-3">
+    <div class="col-12">
+        <div class="position-relative overflow-hidden p-4 p-md-5" style="border-radius: 32px; background: transparent; border: none; box-shadow: none;">
+            <!-- Decorative Gradient Orbs -->
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 15% 50%, rgba(14, 165, 233, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 85% 50%, rgba(20, 184, 166, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+
+            <div class="position-relative z-1">
+                <div class="text-center mb-5">
+                    <span class="badge badge-sky-teal rounded-pill px-3 py-1 fw-bold mb-3" style="letter-spacing: 1px;">
+                        <i class="bi bi-building-fill me-1"></i> Our Facilities
+                    </span>
+                    <h2 class="fw-bold text-dark display-5 mb-3" style="font-family: 'Playfair Display', serif;">World-Class Healthcare Infrastructure</h2>
+                    <p class="text-secondary mx-auto" style="max-width: 650px; font-size: 1.1rem;">
+                        Take a virtual tour of our modern hospital facilities designed for patient comfort, safety, and rapid recovery.
+                    </p>
+                </div>
+
+                <div id="facilitiesCarouselAdvanced" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#facilitiesCarouselAdvanced" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#facilitiesCarouselAdvanced" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#facilitiesCarouselAdvanced" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#facilitiesCarouselAdvanced" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    </div>
+
+                    <div class="carousel-inner rounded-4 overflow-hidden shadow-2xl">
+                        <!-- Slide 1: Intensive Care Unit -->
+                        <div class="carousel-item active">
+                            <div class="row g-0 align-items-stretch rounded-4 overflow-hidden" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); min-height: 420px;">
+                                <div class="col-lg-7 position-relative overflow-hidden d-flex align-items-center justify-content-center" style="min-height: 420px;">
+                                    <img src="{{ url_for('static', filename='img/facility_icu.png') }}" alt="Intensive Care Unit" class="w-100 h-100" style="object-fit: cover; min-height: 420px; max-height: 500px;">
+                                </div>
+                                <div class="col-lg-5 p-4 p-md-5 d-flex flex-column justify-content-center" style="background: rgba(255, 255, 255, 0.85);">
+                                    <div>
+                                        <span class="badge rounded-pill px-3 py-1 fw-bold mb-3" style="background: rgba(14, 165, 233, 0.1); color: #0EA5E9; border: 1px solid rgba(14, 165, 233, 0.25);">Critical Care</span>
+                                        <h3 class="fw-bold text-dark mb-3" style="font-family: 'Playfair Display', serif;">State-of-the-Art ICU</h3>
+                                        <p class="text-secondary mb-4" style="line-height: 1.7;">
+                                            Our Intensive Care Units are equipped with advanced life-support systems, continuous patient monitors, and staffed 24/7 by critical care specialists.
+                                        </p>
+                                        <div class="d-flex align-items-center fw-semibold" style="color: #0EA5E9;">
+                                            <i class="bi bi-check2-circle me-2"></i> 1:1 Specialist Nurse Ratio
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: Operating Theaters -->
+                        <div class="carousel-item">
+                            <div class="row g-0 align-items-stretch rounded-4 overflow-hidden" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); min-height: 420px;">
+                                <div class="col-lg-7 position-relative overflow-hidden d-flex align-items-center justify-content-center" style="min-height: 420px;">
+                                    <img src="{{ url_for('static', filename='img/facility_surgery.png') }}" alt="Modular Operating Theaters" class="w-100 h-100" style="object-fit: cover; min-height: 420px; max-height: 500px;">
+                                </div>
+                                <div class="col-lg-5 p-4 p-md-5 d-flex flex-column justify-content-center" style="background: rgba(255, 255, 255, 0.85);">
+                                    <div>
+                                        <span class="badge rounded-pill px-3 py-1 fw-bold mb-3" style="background: rgba(20, 184, 166, 0.1); color: #14B8A6; border: 1px solid rgba(20, 184, 166, 0.25);">Surgical Excellence</span>
+                                        <h3 class="fw-bold text-dark mb-3" style="font-family: 'Playfair Display', serif;">Modular Operating Theaters</h3>
+                                        <p class="text-secondary mb-4" style="line-height: 1.7;">
+                                            Equipped with laminar airflow, robotic surgery assistants, and real-time imaging for ultra-precise and safe surgical procedures.
+                                        </p>
+                                        <div class="d-flex align-items-center fw-semibold" style="color: #14B8A6;">
+                                            <i class="bi bi-check2-circle me-2"></i> ISO 5 Sterile Environment
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3: Luxury Patient Rooms -->
+                        <div class="carousel-item">
+                            <div class="row g-0 align-items-stretch rounded-4 overflow-hidden" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); min-height: 420px;">
+                                <div class="col-lg-7 position-relative overflow-hidden d-flex align-items-center justify-content-center" style="min-height: 420px;">
+                                    <img src="{{ url_for('static', filename='img/facility_room.png') }}" alt="Smart Patient Rooms" class="w-100 h-100" style="object-fit: cover; min-height: 420px; max-height: 500px;">
+                                </div>
+                                <div class="col-lg-5 p-4 p-md-5 d-flex flex-column justify-content-center" style="background: rgba(255, 255, 255, 0.85);">
+                                    <div>
+                                        <span class="badge rounded-pill px-3 py-1 fw-bold mb-3" style="background: rgba(14, 165, 233, 0.1); color: #0EA5E9; border: 1px solid rgba(14, 165, 233, 0.25);">Comfort & Healing</span>
+                                        <h3 class="fw-bold text-dark mb-3" style="font-family: 'Playfair Display', serif;">Smart Patient Rooms</h3>
+                                        <p class="text-secondary mb-4" style="line-height: 1.7;">
+                                            Private rooms with automated climate control, nurse-call tablets, guest sleeping accommodations, and healing scenic views.
+                                        </p>
+                                        <div class="d-flex align-items-center fw-semibold" style="color: #0EA5E9;">
+                                            <i class="bi bi-check2-circle me-2"></i> Private Suite Accommodations
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4: Emergency Department -->
+                        <div class="carousel-item">
+                            <div class="row g-0 align-items-stretch rounded-4 overflow-hidden" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); min-height: 420px;">
+                                <div class="col-lg-7 position-relative overflow-hidden d-flex align-items-center justify-content-center" style="min-height: 420px;">
+                                    <img src="{{ url_for('static', filename='img/facility_emergency.png') }}" alt="24/7 Emergency Trauma Center" class="w-100 h-100" style="object-fit: cover; min-height: 420px; max-height: 500px;">
+                                </div>
+                                <div class="col-lg-5 p-4 p-md-5 d-flex flex-column justify-content-center" style="background: rgba(255, 255, 255, 0.85);">
+                                    <div>
+                                        <span class="badge rounded-pill px-3 py-1 fw-bold mb-3" style="background: rgba(14, 165, 233, 0.1); color: #0EA5E9; border: 1px solid rgba(14, 165, 233, 0.25);">Rapid Response</span>
+                                        <h3 class="fw-bold text-dark mb-3" style="font-family: 'Playfair Display', serif;">24/7 Emergency Trauma Center</h3>
+                                        <p class="text-secondary mb-4" style="line-height: 1.7;">
+                                            Dedicated trauma bays, rapid triage protocols, and immediate specialist consultation available around the clock.
+                                        </p>
+                                        <div class="d-flex align-items-center fw-semibold" style="color: #0EA5E9;">
+                                            <i class="bi bi-check2-circle me-2"></i> Under 5-Minute Average Triage
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#facilitiesCarouselAdvanced" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon rounded-circle bg-dark bg-opacity-50 p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#facilitiesCarouselAdvanced" data-bs-slide="next">
+                        <span class="carousel-control-next-icon rounded-circle bg-dark bg-opacity-50 p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 8. Patient Comfort & Amenities Section -->
+<div class="row my-5 py-3">
+    <div class="col-12">
+        <div class="position-relative overflow-hidden p-4 p-md-5" style="border-radius: 32px; background: transparent; border: none; box-shadow: none;">
+            <!-- Decorative Elements -->
+            <div class="position-absolute top-0 end-0 w-96 h-96 rounded-circle" style="background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%); transform: translate(40%, -40%); pointer-events: none;"></div>
+            <div class="position-absolute bottom-0 start-0 w-80 h-80 rounded-circle" style="background: radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 70%); transform: translate(-40%, 40%); pointer-events: none;"></div>
+
+            <div class="position-relative z-1">
+                <div class="text-center mb-5">
+                    <span class="badge badge-sky-teal rounded-pill px-3 py-1 fw-bold mb-3" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(20, 184, 166, 0.15) 100%) !important; color: #0EA5E9 !important; border: 1px solid rgba(14, 165, 233, 0.4) !important; letter-spacing: 1px;">
+                        <i class="bi bi-star-fill me-1"></i> Amenities
+                    </span>
+                    <h2 class="fw-bold text-dark display-5 mb-3" style="font-family: 'Playfair Display', serif;">Patient Comfort & Amenities</h2>
+                    <p class="text-secondary mx-auto" style="max-width: 650px; font-size: 1.1rem;">
+                        We provide a comfortable and healing environment with world-class amenities for our patients and visitors.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Amenity 1 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="amenity-card h-100 p-4 rounded-4 transition-all" style="background: rgba(255, 255, 255, 0.80); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);">
+                            <div class="amenity-icon mb-3">
+                                <i class="bi bi-wifi"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">Free Wi-Fi</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">High-speed internet connectivity throughout the hospital premises for patients and visitors.</p>
+                        </div>
+                    </div>
+
+                    <!-- Amenity 2 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="amenity-card h-100 p-4 rounded-4 transition-all" style="background: rgba(255, 255, 255, 0.80); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);">
+                            <div class="amenity-icon amenity-icon-emerald mb-3">
+                                <i class="bi bi-cup-hot"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">Cafeteria & Dining</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Nutritious meals and beverages available 24/7 with customized dietary options for all patients.</p>
+                        </div>
+                    </div>
+
+                    <!-- Amenity 3 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="amenity-card h-100 p-4 rounded-4 transition-all" style="background: rgba(255, 255, 255, 0.80); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);">
+                            <div class="amenity-icon amenity-icon-purple mb-3">
+                                <i class="bi bi-car-front"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">Parking Facility</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Spacious parking area with valet service and dedicated wheelchair accessibility.</p>
+                        </div>
+                    </div>
+
+                    <!-- Amenity 4 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="amenity-card h-100 p-4 rounded-4 transition-all" style="background: rgba(255, 255, 255, 0.80); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);">
+                            <div class="amenity-icon amenity-icon-amber mb-3">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">Security & Safety</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">24/7 CCTV surveillance and trained security personnel ensuring complete safety.</p>
+                        </div>
+                    </div>
+
+                    <!-- Amenity 5 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="amenity-card h-100 p-4 rounded-4 transition-all" style="background: rgba(255, 255, 255, 0.80); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);">
+                            <div class="amenity-icon amenity-icon-rose mb-3">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">Visitor Lounge</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Comfortable waiting lounges equipped with refreshments and charging stations.</p>
+                        </div>
+                    </div>
+
+                    <!-- Amenity 6 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="amenity-card h-100 p-4 rounded-4 transition-all" style="background: rgba(255, 255, 255, 0.80); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);">
+                            <div class="amenity-icon amenity-icon-cyan mb-3">
+                                <i class="bi bi-capsule"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2">In-House Pharmacy</h5>
+                            <p class="text-secondary small mb-0" style="font-size: 0.9rem; line-height: 1.6;">Fully stocked pharmacy open 24/7 for immediate prescription fulfillment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 9. What Our Patients Say (Patient Stories / Testimonials Section) -->
+<div class="row my-5 py-3">
+    <div class="col-12">
+        <div class="position-relative overflow-hidden p-4 p-md-5" style="border-radius: 32px; background: transparent; border: none; box-shadow: none;">
+            <!-- Decorative light orbs -->
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 80% 70%, rgba(20, 184, 166, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+
+            <div class="position-relative z-1">
+                <div class="text-center mb-5">
+                    <span class="badge badge-sky-teal rounded-pill px-3 py-1 fw-bold mb-3" style="letter-spacing: 1px;">
+                        <i class="bi bi-chat-quote-fill me-1"></i> Patient Stories
+                    </span>
+                    <h2 class="fw-bold text-dark display-5 mb-3" style="font-family: 'Playfair Display', serif;">What Our Patients Say</h2>
+                    <p class="text-secondary mx-auto" style="max-width: 650px; font-size: 1.1rem;">
+                        Real experiences from real patients who have trusted us with their healthcare journey.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Testimonial 1 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card h-100 p-4 rounded-4 position-relative overflow-hidden" style="background: rgba(255, 255, 255, 0.70); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.55); box-shadow: 0 4px 12px rgba(14, 165, 233, 0.07);">
+                            <div class="position-absolute top-0 end-0 p-3">
+                                <i class="bi bi-quote" style="font-size: 3rem; color: rgba(14, 165, 233, 0.15);"></i>
+                            </div>
+                            <div class="mb-3">
+                                <div class="text-warning mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.7;">"The care I received was exceptional. The doctors were knowledgeable and took time to explain everything. Highly recommend!"</p>
+                            </div>
+                            <div class="d-flex align-items-center mt-4">
+                                <div class="testimonial-avatar me-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 50px; height: 50px; background: linear-gradient(135deg, #0EA5E9, #0284C7); font-size: 1.2rem;">SM</div>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-0">Sarah Mitchell</h6>
+                                    <p class="text-secondary small mb-0">Cardiology Patient</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card h-100 p-4 rounded-4 position-relative overflow-hidden" style="background: rgba(255, 255, 255, 0.70); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.55); box-shadow: 0 4px 12px rgba(14, 165, 233, 0.07);">
+                            <div class="position-absolute top-0 end-0 p-3">
+                                <i class="bi bi-quote" style="font-size: 3rem; color: rgba(20, 184, 166, 0.15);"></i>
+                            </div>
+                            <div class="mb-3">
+                                <div class="text-warning mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.7;">"From booking to consultation, the entire process was seamless. The online portal made accessing lab results effortless."</p>
+                            </div>
+                            <div class="d-flex align-items-center mt-4">
+                                <div class="testimonial-avatar me-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 50px; height: 50px; background: linear-gradient(135deg, #14B8A6, #0D9488); font-size: 1.2rem;">RR</div>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-0">Robert Reynolds</h6>
+                                    <p class="text-secondary small mb-0">Orthopedic Patient</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card h-100 p-4 rounded-4 position-relative overflow-hidden" style="background: rgba(255, 255, 255, 0.70); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.55); box-shadow: 0 4px 12px rgba(14, 165, 233, 0.07);">
+                            <div class="position-absolute top-0 end-0 p-3">
+                                <i class="bi bi-quote" style="font-size: 3rem; color: rgba(14, 165, 233, 0.15);"></i>
+                            </div>
+                            <div class="mb-3">
+                                <div class="text-warning mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.7;">"The staff is compassionate and attentive. The facilities are modern and spotless. Truly a world-class healthcare experience."</p>
+                            </div>
+                            <div class="d-flex align-items-center mt-4">
+                                <div class="testimonial-avatar me-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 50px; height: 50px; background: linear-gradient(135deg, #0EA5E9, #14B8A6); font-size: 1.2rem;">ER</div>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-0">Elena Rostova</h6>
+                                    <p class="text-secondary small mb-0">Pediatric Parent</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 10. Final Call to Action Section -->
+<div class="row my-5 py-3">
+    <div class="col-12">
+        <div class="rounded-4 p-5 text-center position-relative overflow-hidden" style="background: transparent; border: none; box-shadow: none;">
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.08) 0%, transparent 60%); pointer-events: none;"></div>
+            <div class="position-absolute bottom-0 end-0 w-100 h-100" style="background: radial-gradient(circle at 90% 80%, rgba(20, 184, 166, 0.06) 0%, transparent 60%); pointer-events: none;"></div>
+
+            <div class="position-relative z-1 py-3">
+                <span class="badge rounded-pill px-3 py-1 fw-bold mb-3" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(20, 184, 166, 0.15)); color: #0EA5E9; border: 1px solid rgba(14, 165, 233, 0.35);">Get Started Today</span>
+                <h2 class="display-5 fw-bold text-dark mb-3" style="font-family: 'Playfair Display', serif;">Ready to Experience Exceptional Healthcare?</h2>
+                <p class="text-secondary mx-auto mb-4" style="max-width: 600px; font-size: 1.15rem; line-height: 1.7;">
+                    Book your appointment today and take the first step towards better health with our team of trusted specialists.
+                </p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="{{ url_for('booking') }}" class="btn rounded-pill px-5 py-3 fw-bold text-white shadow transition-all" style="background: linear-gradient(135deg, #0EA5E9, #14B8A6); border: none; box-shadow: 0 8px 25px rgba(14, 165, 233, 0.35);">
+                        <i class="bi bi-calendar2-check-fill me-2"></i> Book Appointment Now
+                    </a>
+                    <a href="{{ url_for('departments') }}" class="btn btn-outline-secondary rounded-pill px-5 py-3 fw-bold transition-all">
+                        Explore Departments
+                    </a>
+                </div>
+                <p class="small text-secondary mt-4 mb-0"><i class="bi bi-shield-lock-fill me-1" style="color: #14B8A6;"></i>Secure &amp; Confidential Booking</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 2. Advanced Statistics Section with Classic Light Style -->
+<div class="row my-5 py-3">
+    <div class="col-12">
+        <div class="rounded-4 position-relative overflow-hidden" style="background: transparent; border: none; box-shadow: none;">
+            <!-- Animated top border -->
+            <div class="position-absolute top-0 start-0 w-100" style="height: 3px; background: linear-gradient(90deg, #0EA5E9, #14B8A6, #0284C7, #0EA5E9); background-size: 200% 100%; animation: gradientMove 8s linear infinite; z-index: 4;"></div>
+
+            <!-- Decorative gradient orbs -->
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 15% 50%, rgba(14, 165, 233, 0.06) 0%, transparent 50%); z-index: 0; pointer-events: none;"></div>
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at 85% 50%, rgba(20, 184, 166, 0.06) 0%, transparent 50%); z-index: 0; pointer-events: none;"></div>
+
+            <div class="row g-0 position-relative z-1">
+                <!-- Stat 1: Specialists -->
+                <div class="col-lg-3 col-sm-6 stat-item">
+                    <div class="h-100 d-flex flex-column align-items-center justify-content-center p-4 p-md-5 transition-all stat-card" style="border-right: 1px solid rgba(200, 220, 240, 0.5);">
+                        <div class="position-relative mb-3">
+                            <div class="stat-icon-wrapper">
+                                <i class="bi bi-person-badge"></i>
+                            </div>
+                            <div class="position-absolute top-50 start-50 translate-middle w-100 h-100 rounded-circle" style="background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, transparent 70%); animation: pulse 2s ease-in-out infinite;"></div>
+                        </div>
+                        <h2 class="display-5 fw-bold text-dark mb-1 d-flex align-items-baseline" style="font-family: 'Playfair Display', serif;">
+                            <span class="stat-number" data-target="150" data-suffix="+">0</span>
+                        </h2>
+                        <h6 class="text-uppercase fw-semibold text-dark mb-1" style="letter-spacing: 1.5px; font-size: 0.85rem;">Specialists</h6>
+                        <p class="text-secondary small mb-0 text-center" style="font-size: 0.8rem;">World-Class Doctors</p>
+                    </div>
+                </div>
+
+                <!-- Stat 2: Satisfied Patients -->
+                <div class="col-lg-3 col-sm-6 stat-item">
+                    <div class="h-100 d-flex flex-column align-items-center justify-content-center p-4 p-md-5 transition-all stat-card" style="border-right: 1px solid rgba(200, 220, 240, 0.5);">
+                        <div class="position-relative mb-3">
+                            <div class="stat-icon-wrapper stat-icon-emerald">
+                                <i class="bi bi-heart-pulse"></i>
+                            </div>
+                            <div class="position-absolute top-50 start-50 translate-middle w-100 h-100 rounded-circle" style="background: radial-gradient(circle, rgba(20, 184, 166, 0.12) 0%, transparent 70%); animation: pulse 2s ease-in-out infinite 0.5s;"></div>
+                        </div>
+                        <h2 class="display-5 fw-bold text-dark mb-1 d-flex align-items-baseline" style="font-family: 'Playfair Display', serif;">
+                            <span class="stat-number" data-target="50000" data-suffix="+">0</span>
+                        </h2>
+                        <h6 class="text-uppercase fw-semibold text-dark mb-1" style="letter-spacing: 1.5px; font-size: 0.85rem;">Patients</h6>
+                        <p class="text-secondary small mb-0 text-center" style="font-size: 0.8rem;">Satisfied &amp; Recovered</p>
+                    </div>
+                </div>
+
+                <!-- Stat 3: Rooms & Wards -->
+                <div class="col-lg-3 col-sm-6 stat-item">
+                    <div class="h-100 d-flex flex-column align-items-center justify-content-center p-4 p-md-5 transition-all stat-card" style="border-right: 1px solid rgba(200, 220, 240, 0.5);">
+                        <div class="position-relative mb-3">
+                            <div class="stat-icon-wrapper stat-icon-purple">
+                                <i class="bi bi-hospital"></i>
+                            </div>
+                            <div class="position-absolute top-50 start-50 translate-middle w-100 h-100 rounded-circle" style="background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%); animation: pulse 2s ease-in-out infinite 1s;"></div>
+                        </div>
+                        <h2 class="display-5 fw-bold text-dark mb-1 d-flex align-items-baseline" style="font-family: 'Playfair Display', serif;">
+                            <span class="stat-number" data-target="500" data-suffix="+">0</span>
+                        </h2>
+                        <h6 class="text-uppercase fw-semibold text-dark mb-1" style="letter-spacing: 1.5px; font-size: 0.85rem;">Rooms</h6>
+                        <p class="text-secondary small mb-0 text-center" style="font-size: 0.8rem;">Modern Infrastructure</p>
+                    </div>
+                </div>
+
+                <!-- Stat 4: Emergency Support -->
+                <div class="col-lg-3 col-sm-6 stat-item">
+                    <div class="h-100 d-flex flex-column align-items-center justify-content-center p-4 p-md-5 transition-all stat-card">
+                        <div class="position-relative mb-3">
+                            <div class="stat-icon-wrapper stat-icon-amber">
+                                <i class="bi bi-clock-history"></i>
+                            </div>
+                            <div class="position-absolute top-50 start-50 translate-middle w-100 h-100 rounded-circle" style="background: radial-gradient(circle, rgba(251, 191, 36, 0.12) 0%, transparent 70%); animation: pulse 2s ease-in-out infinite 1.5s;"></div>
+                        </div>
+                        <h2 class="display-5 fw-bold text-dark mb-1 d-flex align-items-baseline" style="font-family: 'Playfair Display', serif;">
+                            <span>24/7</span>
+                        </h2>
+                        <h6 class="text-uppercase fw-semibold text-dark mb-1" style="letter-spacing: 1.5px; font-size: 0.85rem;">Emergency</h6>
+                        <p class="text-secondary small mb-0 text-center" style="font-size: 0.8rem;">Always Here For You</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Set background images
+        document.querySelectorAll('.set-bg').forEach(function (el) {
+            var bgUrl = el.getAttribute('data-bg');
+            if (bgUrl) {
+                el.style.backgroundImage = "url('" + bgUrl + "')";
+            }
+        });
+
+        // Animated number counter
+        function animateCounter(element, target, suffix = '') {
+            let current = 0;
+            const increment = target / 60;
+            const duration = 2000;
+            const stepTime = duration / 60;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+
+                // Format number
+                let displayValue;
+                if (target >= 1000) {
+                    displayValue = (current / 1000).toFixed(0) + suffix;
+                } else {
+                    displayValue = Math.floor(current) + suffix;
+                }
+
+                element.textContent = displayValue;
+            }, stepTime);
+        }
+
+        // Intersection Observer for triggering animations
+        const observerOptions = {
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-target'));
+                        const suffix = stat.getAttribute('data-suffix') || '+';
+                        if (target && !stat.classList.contains('animated')) {
+                            stat.classList.add('animated');
+                            animateCounter(stat, target, suffix);
+                        }
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe statistics section
+        const statSection = document.querySelector('.stat-item')?.closest('.row');
+        if (statSection) {
+            observer.observe(statSection);
+        }
+    });
+</script>
+{% endblock %}
+
+{% endblock %}

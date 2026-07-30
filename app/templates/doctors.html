@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %}Our Doctors - New Life Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-0 position-relative doctors-page-bg">
+    <div class="doctors-page-content">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                <h2 class="fw-bold mb-1"
+                    style="font-family: 'Inter', sans-serif; font-size: 2rem; letter-spacing: -0.5px;">Medical
+                    Specialists</h2>
+                <p class="text-muted mb-0" style="font-size: 0.95rem;">Meet our team of experienced healthcare
+                    professionals</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            {% for doctor in doctors %}
+
+            {% set spec = doctor.specialization.lower() %}
+            {% set theme_color = 'var(--primary-blue)' %}
+            {% set theme_grad = 'linear-gradient(135deg, var(--primary-blue), var(--secondary-teal))' %}
+
+            {% if 'cardio' in spec %}
+            {% set icon_class = 'bi-heart-pulse' %}
+            {% set spec_image = 'dept_cardiology_1784631962622.png' %}
+            {% elif 'neuro' in spec %}
+            {% set icon_class = 'bi-activity' %}
+            {% set spec_image = 'dept_neurology_1784631972784.png' %}
+            {% elif 'pedia' in spec %}
+            {% set icon_class = 'bi-emoji-smile' %}
+            {% set spec_image = 'dept_pediatrics_1784631982544.png' %}
+            {% elif 'ortho' in spec %}
+            {% set icon_class = 'bi-file-medical' %}
+            {% set spec_image = 'dept_orthopedics_1784631992502.png' %}
+            {% elif 'derma' in spec %}
+            {% set icon_class = 'bi-bandaid' %}
+            {% set spec_image = 'dept_dermatology_1784632003566.png' %}
+            {% else %}
+            {% set icon_class = 'bi-h-square' %}
+            {% set spec_image = 'dept_laboratory_1784632015075.png' %}
+            {% endif %}
+
+            {% set cover_style = 'height: 140px; background: ' ~ theme_grad ~ ';' %}
+            {% set avatar_style = 'font-size: 2.5rem; background: ' ~ theme_grad ~ ';' %}
+            {% set badge_style = 'background: linear-gradient(135deg, color-mix(in srgb, ' ~ theme_color ~ ' 10%,
+            white), color-mix(in srgb, ' ~ theme_color ~ ' 5%, white)); color: ' ~ theme_color ~ '; border: 1px solid
+            color-mix(in srgb, ' ~ theme_color ~ ' 20%, white) !important; font-size: 0.75rem; letter-spacing: 0.8px;
+            font-weight: 700; text-transform: uppercase; box-shadow: 0 2px 8px color-mix(in srgb, ' ~ theme_color ~ '
+            15%, transparent);' %}
+            {% set btn_style = 'background: linear-gradient(135deg, ' ~ theme_color ~ ', color-mix(in srgb, ' ~
+            theme_color ~ ' 85%, black)); color: white; border: none; box-shadow: 0 6px 20px color-mix(in srgb, ' ~
+            theme_color ~ ' 40%, transparent); font-weight: 700; letter-spacing: 0.5px;' %}
+            {% set hover_in = "this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 12px 30px
+            color-mix(in srgb, " ~ theme_color ~ " 60%, transparent)'; this.style.background='linear-gradient(135deg, "
+            ~ theme_color ~ ", color-mix(in srgb, " ~ theme_color ~ " 75%, black))';" %}
+            {% set hover_out = "this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 6px 20px
+            color-mix(in srgb, " ~ theme_color ~ " 40%, transparent)'; this.style.background='linear-gradient(135deg, "
+            ~ theme_color ~ ", color-mix(in srgb, " ~ theme_color ~ " 85%, black))';" %}
+
+            {% set cover_attr = 'style="' ~ cover_style ~ '"' %}
+            {% set avatar_attr = 'style="' ~ avatar_style ~ ' font-family: \'Inter\', sans-serif;"' %}
+            {% set badge_attr = 'style="' ~ badge_style ~ '"' %}
+            {% set btn_attr = 'style="' ~ btn_style ~ '" onmouseover="' ~ hover_in ~ '" onmouseout="' ~ hover_out ~ '"'
+            %}
+
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="hms-card h-100 d-flex flex-column p-0 border-0 overflow-hidden position-relative"
+                    style="border-radius: 24px; box-shadow: 0 4px 25px rgba(0,0,0,0.06); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); min-height: 420px;"
+                    onmouseover="this.style.transform='translateY(-12px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.12)';"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 25px rgba(0,0,0,0.06)';">
+
+                    <!-- Gradient Cover -->
+                    <div class="w-100 position-relative overflow-hidden" {{ cover_attr|safe }}>
+                        <!-- Decorative radial glow -->
+                        <div class="position-absolute w-100 h-100"
+                            style="background: radial-gradient(circle at top right, rgba(255,255,255,0.3) 0%, transparent 65%); top: 0; left: 0;">
+                        </div>
+                        <i class="bi {{ icon_class }} position-absolute text-white"
+                            style="font-size: 7.5rem; top: -20px; right: -20px; opacity: 0.25; transform: rotate(15deg); filter: blur(1px);"></i>
+                    </div>
+
+                    <!-- Avatar overlapping cover -->
+                    <div class="text-center" style="margin-top: -55px; position: relative; z-index: 2;">
+                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center p-1.5"
+                            style="width: 100px; height: 100px; box-shadow: 0 15px 35px -5px rgba(0,0,0,0.2);">
+                            <div class="text-white rounded-circle d-flex align-items-center justify-content-center w-100 h-100 fw-bolder"
+                                {{ avatar_attr|safe }}>
+                                {{ doctor.name.split(' ')[-1][0]|upper if ' ' in doctor.name else doctor.name[0]|upper
+                                }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body text-center d-flex flex-column px-4 pb-4 pt-4 flex-grow-1 bg-white"
+                        style="position: relative; z-index: 1;">
+                        <h5 class="fw-bold mb-2 text-dark"
+                            style="font-family: 'Inter', sans-serif; font-size: 1.35rem; letter-spacing: -0.4px; line-height: 1.3;">
+                            {{ doctor.name }}</h5>
+                        <div class="rounded-pill mb-4 mx-auto px-4 py-1.5 border text-uppercase" {{ badge_attr|safe }}>
+                            <i class="bi {{ icon_class }} me-1.5"></i>{{ doctor.specialization }}
+                        </div>
+
+                        <p class="text-muted mb-4" style="line-height: 1.7; font-size: 0.875rem; color: #64748b;">Highly
+                            experienced specialist dedicated to providing top-tier patient care and comprehensive
+                            treatments with modern medical approaches.</p>
+
+                        <div class="mt-auto gap-2 d-flex flex-column">
+                            <a href="{{ url_for('doctor_schedule', doctor_id=doctor.id) }}"
+                                class="btn rounded-pill fw-bold w-100 transition-all py-2.5" {{ btn_attr|safe }}>
+                                <i class="bi bi-calendar-check me-2"></i> View Schedule
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

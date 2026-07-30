@@ -1,0 +1,706 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Appointment - New Life Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<style>
+    /* Booking Component Premium Styles */
+    :root {
+        --b-primary: #0EA5E9;
+        --b-secondary: #14B8A6;
+        --b-bg: #F8FAFC;
+        --b-card: #FFFFFF;
+        --b-text: #0F172A;
+        --b-text-sec: #64748B;
+        --b-border: #E2E8F0;
+    }
+
+    .booking-wrapper {
+        background-color: var(--b-bg);
+        min-height: 100vh;
+        margin: -1.5rem 0;
+        /* Negate base.html padding temporarily */
+        padding: 4rem 1rem;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .premium-card {
+        background: var(--b-card);
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+        max-width: 1000px;
+        margin: 0 auto;
+        overflow: visible;
+        position: relative;
+    }
+
+    .premium-header {
+        background: linear-gradient(135deg, #1e40af, #0ea5e9);
+        border-radius: 16px 16px 0 0;
+        padding: 1.5rem 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Abstract Header Illustrations */
+    .header-ill-icon {
+        position: absolute;
+        color: white;
+        opacity: 0.1;
+        transition: all 0.5s ease;
+    }
+
+    .header-ill-1 {
+        font-size: 8rem;
+        right: -20px;
+        top: -20px;
+        transform: rotate(15deg);
+    }
+
+    .header-ill-2 {
+        font-size: 4rem;
+        right: 120px;
+        bottom: 20px;
+        opacity: 0.15;
+    }
+
+    .header-ill-3 {
+        font-size: 3rem;
+        right: 220px;
+        top: 30px;
+        transform: rotate(-10deg);
+    }
+
+    .header-ill-4 {
+        font-size: 5rem;
+        right: 50px;
+        top: 80px;
+        opacity: 0.05;
+    }
+
+    /* Floating Label Inputs */
+    .floating-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+    .premium-input {
+        width: 100%;
+        height: 56px;
+        padding: 0 16px 0 52px;
+        border-radius: 16px;
+        border: 2px solid var(--b-border);
+        background: var(--b-card);
+        color: var(--b-text);
+        font-weight: 500;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-size: 1rem;
+    }
+
+    .premium-input:focus {
+        outline: none;
+        border-color: var(--b-primary);
+        box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+        background: var(--b-card);
+    }
+
+    .premium-input::placeholder {
+        color: transparent;
+    }
+
+    .premium-icon {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.25rem;
+        color: var(--b-text-sec);
+        z-index: 4;
+        transition: all 0.3s ease;
+        pointer-events: none;
+    }
+
+    .premium-input:focus~.premium-icon,
+    .premium-input:not(:placeholder-shown)~.premium-icon {
+        color: var(--b-primary);
+    }
+
+    .floating-label {
+        position: absolute;
+        left: 52px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--b-text-sec);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        z-index: 5;
+        background: var(--b-card);
+        padding: 0 6px;
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    .premium-input:focus~.floating-label,
+    .premium-input:not(:placeholder-shown)~.floating-label {
+        top: 0;
+        transform: translateY(-50%) scale(0.85);
+        color: var(--b-primary);
+        font-weight: 600;
+        left: 42px;
+    }
+
+    /* Doctor Custom Dropdown */
+    .doc-dropdown-trigger {
+        min-height: 72px;
+        height: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 16px;
+        border: 2px solid var(--b-border);
+        background: var(--b-card);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .doc-dropdown-trigger:hover {
+        border-color: #cbd5e1;
+    }
+
+    .doc-dropdown-trigger.active {
+        border-color: var(--b-primary);
+        box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+    }
+
+    .doc-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--b-card);
+        border: 1px solid var(--b-border);
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+        max-height: 300px;
+        overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.2s ease;
+        margin-top: 8px;
+    }
+
+    .doc-menu.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .doc-option {
+        padding: 12px 16px;
+        cursor: pointer;
+        transition: background 0.2s;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .doc-option:last-child {
+        border-bottom: none;
+    }
+
+    .doc-option:hover {
+        background: #f8fafc;
+    }
+
+    .doc-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #e0f2fe, #ccfbf1);
+        color: var(--b-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    /* Summary Card */
+    .summary-card {
+        background: var(--b-bg);
+        border: 1px solid var(--b-border);
+        border-radius: 20px;
+        padding: 1.5rem;
+        position: sticky;
+        top: 100px;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px dashed var(--b-border);
+    }
+
+    .summary-row:last-child {
+        border-bottom: none;
+    }
+
+    /* Submit Button */
+    .btn-premium {
+        height: 60px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--b-primary), var(--b-secondary));
+        color: white;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border: none;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-premium:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 24px rgba(14, 165, 233, 0.3);
+        color: white;
+    }
+
+    .btn-premium::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.5s ease;
+    }
+
+    .btn-premium:hover::after {
+        left: 150%;
+    }
+
+    /* Loading Spinner */
+    .btn-spinner {
+        display: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    @keyframes spin {
+        to {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    .btn-premium.loading {
+        color: transparent !important;
+        pointer-events: none;
+    }
+
+    .btn-premium.loading .btn-spinner {
+        display: block;
+    }
+</style>
+
+<div class="booking-wrapper w-100">
+    <!-- Premium Card Container -->
+    <div class="premium-card">
+
+        <!-- Hero Header -->
+        <div class="premium-header">
+            <i class="bi bi-hospital header-ill-icon header-ill-1"></i>
+            <i class="bi bi-calendar-check header-ill-icon header-ill-2"></i>
+            <i class="bi bi-heart-pulse header-ill-icon header-ill-3"></i>
+            <i class="bi bi-clipboard2-pulse header-ill-icon header-ill-4"></i>
+
+            <div class="row position-relative z-1">
+                <div class="col-md-8 text-white">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center me-3"
+                            style="width: 56px; height: 56px;">
+                            <i class="bi bi-calendar2-plus fs-3"></i>
+                        </div>
+                        <h2 class="fw-bold mb-0" style="font-family: 'Playfair Display', serif; font-size: 2.25rem;">
+                            Book Appointment</h2>
+                    </div>
+                    <p class="fs-6 opacity-75 mb-0 ms-1" style="max-width: 400px; font-weight: 500;">
+                        Schedule a consultation with your preferred doctor quickly and securely.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Body -->
+        <div class="p-4 p-md-5">
+            <form method="POST" action="{{ url_for('booking') }}" id="bookingForm" novalidate>
+                {{ form.hidden_tag() }}
+
+                <div class="row g-5">
+                    <!-- Left Column: Form Fields -->
+                    <div class="col-lg-8">
+
+                        <!-- Row 1: Patient Name & Date -->
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <div class="floating-group">
+                                    {{ form.patient_name(class="premium-input" + (" is-invalid" if
+                                    form.patient_name.errors else ""), id="patientNameInput", placeholder=" ") }}
+                                    <i class="bi bi-person premium-icon"></i>
+                                    <label class="floating-label">Patient Name</label>
+                                    {% for error in form.patient_name.errors %}<div
+                                        class="text-danger small mt-1 ps-2 fw-medium">{{ error }}</div>{% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-group">
+                                    {{ form.appointment_date(class="premium-input" + (" is-invalid" if
+                                    form.appointment_date.errors else ""), id="dateInput", type="date", placeholder=" ")
+                                    }}
+                                    <i class="bi bi-calendar3 premium-icon"></i>
+                                    <label class="floating-label">Appointment Date</label>
+                                    {% for error in form.appointment_date.errors %}<div
+                                        class="text-danger small mt-1 ps-2 fw-medium">{{ error }}</div>{% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Doctor Selection -->
+                        <div class="mb-4 position-relative">
+                            <label class="form-label text-secondary fw-semibold small mb-2 ps-1">Select
+                                Specialist</label>
+                            <div class="d-none">{{ form.doctor_id(id="real_doctor_id") }}</div>
+
+                            <div class="doc-dropdown-trigger d-flex align-items-center justify-content-between px-3"
+                                id="docDropdownBtn">
+                                <div class="d-flex align-items-center gap-3" id="docSelectedContent">
+                                    <div class="doc-avatar bg-light text-secondary"><i class="bi bi-search"></i></div>
+                                    <span class="text-muted fw-medium">Choose a doctor...</span>
+                                </div>
+                                <i class="bi bi-chevron-down text-muted transition-all" id="docChevron"></i>
+                            </div>
+
+                            <div class="doc-menu" id="docMenu">
+                                {% for choice_val, choice_label in form.doctor_id.choices %}
+                                {% set parts = choice_label.split(' - ') %}
+                                {% set doc_name = parts[0] %}
+                                {% set doc_spec = parts[1] if parts|length > 1 else 'Specialist' %}
+                                <div class="doc-option d-flex align-items-center gap-3" data-val="{{ choice_val }}"
+                                    data-name="{{ doc_name }}" data-spec="{{ doc_spec }}">
+                                    <div class="doc-avatar">{{ doc_name[0]|upper if 'Dr' not in doc_name else
+                                        doc_name[3]|upper }}</div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-bold text-dark mb-0">{{ doc_name }}</div>
+                                        <div class="d-flex align-items-center gap-2 mt-1">
+                                            <span class="badge rounded-pill bg-light text-secondary border fw-medium"
+                                                style="font-size: 0.7rem;">{{ doc_spec }}</span>
+                                            <span
+                                                class="badge rounded-pill bg-success bg-opacity-10 text-success fw-medium"
+                                                style="font-size: 0.7rem;"><i
+                                                    class="bi bi-check-circle-fill me-1"></i>Available Today</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% for error in form.doctor_id.errors %}<div class="text-danger small mt-1 ps-2 fw-medium">
+                                {{ error }}</div>{% endfor %}
+                        </div>
+
+                        <!-- Row 3: Time Slots -->
+                        <div class="mb-5 position-relative">
+                            <div class="d-flex justify-content-between align-items-end mb-2 ps-1">
+                                <label class="form-label text-secondary fw-semibold small mb-0">Select Time Slot</label>
+                                <div class="d-flex gap-3 text-secondary small fw-medium">
+                                    <span><span class="text-primary fw-bold" id="slotsAvailableCount">12</span>
+                                        Available</span>
+                                </div>
+                            </div>
+
+                            <div class="d-none">{{ form.time_slot(id="real_time_slot") }}</div>
+
+                            <div class="doc-dropdown-trigger d-flex align-items-center justify-content-between px-3"
+                                id="timeDropdownBtn">
+                                <div class="d-flex align-items-center gap-3" id="timeSelectedContent">
+                                    <div class="doc-avatar bg-light text-secondary"><i class="bi bi-clock"></i></div>
+                                    <span class="text-muted fw-medium">Choose a time...</span>
+                                </div>
+                                <i class="bi bi-chevron-down text-muted transition-all" id="timeChevron"></i>
+                            </div>
+
+                            <div class="doc-menu" id="timeMenu">
+                                {% for choice_val, choice_label in form.time_slot.choices %}
+                                <div class="time-option doc-option d-flex align-items-center gap-3"
+                                    data-val="{{ choice_val }}" data-label="{{ choice_label }}">
+                                    <div class="doc-avatar"><i class="bi bi-clock-history"></i></div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-bold text-dark mb-0 lh-sm">{{ choice_label }}</div>
+                                        <div class="d-flex align-items-center gap-2 mt-1">
+                                            <span
+                                                class="badge rounded-pill bg-success bg-opacity-10 text-success fw-medium d-none d-sm-inline-block"
+                                                style="font-size: 0.7rem;"><i
+                                                    class="bi bi-check-circle-fill me-1"></i>Available</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% for error in form.time_slot.errors %}<div class="text-danger small mt-1 ps-2 fw-medium">
+                                {{ error }}</div>{% endfor %}
+                        </div>
+
+                        <!-- Submit Button (Mobile normally, but full width here) -->
+                        <button type="submit"
+                            class="btn btn-premium w-100 mt-2 d-flex align-items-center justify-content-center gap-2"
+                            id="submitBtn">
+                            <i class="bi bi-calendar2-check-fill fs-5"></i>
+                            <span>Confirm Appointment</span>
+                            <div class="btn-spinner"></div>
+                        </button>
+                    </div>
+
+                    <!-- Right Column: Live Summary -->
+                    <div class="col-lg-4 d-none d-lg-block">
+                        <div class="summary-card shadow-sm">
+                            <h6 class="fw-bold mb-4 text-dark d-flex align-items-center gap-2">
+                                <i class="bi bi-receipt text-primary"></i> Appointment Summary
+                            </h6>
+
+                            <div class="summary-row">
+                                <span class="text-secondary small fw-medium">Doctor</span>
+                                <span class="text-dark fw-bold small text-end" id="sumDoctor">--</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="text-secondary small fw-medium">Specialty</span>
+                                <span class="text-dark fw-bold small text-end" id="sumSpec">--</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="text-secondary small fw-medium">Patient</span>
+                                <span class="text-dark fw-bold small text-end text-truncate" style="max-width: 120px;"
+                                    id="sumPatient">--</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="text-secondary small fw-medium">Date</span>
+                                <span class="text-dark fw-bold small text-end" id="sumDate">--</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="text-secondary small fw-medium">Time</span>
+                                <span class="text-primary fw-bold small text-end" id="sumTime">--</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="text-secondary small fw-medium">Duration</span>
+                                <span class="text-dark fw-bold small text-end">30 Minutes</span>
+                            </div>
+                            <div class="summary-row border-0 pb-0 mt-2">
+                                <span class="text-secondary small fw-medium">Status</span>
+                                <span
+                                    class="badge bg-warning bg-opacity-10 text-warning border border-warning border-opacity-25 rounded-pill px-3">Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // --- Form References ---
+        const patientInput = document.getElementById('patientNameInput');
+        const dateInput = document.getElementById('dateInput');
+        const realDocSelect = document.getElementById('real_doctor_id');
+        const realTimeSelect = document.getElementById('real_time_slot');
+        const submitBtn = document.getElementById('submitBtn');
+        const form = document.getElementById('bookingForm');
+
+        // --- Summary References ---
+        const sumPatient = document.getElementById('sumPatient');
+        const sumDate = document.getElementById('sumDate');
+        const sumDoctor = document.getElementById('sumDoctor');
+        const sumSpec = document.getElementById('sumSpec');
+        const sumTime = document.getElementById('sumTime');
+
+        // --- Live Updates: Text Inputs ---
+        patientInput.addEventListener('input', (e) => {
+            sumPatient.textContent = e.target.value || '--';
+        });
+
+        dateInput.addEventListener('change', (e) => {
+            if (e.target.value) {
+                const d = new Date(e.target.value);
+                // Formatting Date to look nice (e.g. Oct 24, 2023)
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                // Using UTC methods to prevent timezone shifting the selected date
+                sumDate.textContent = d.toLocaleDateString('en-US', options) + ' (UTC)';
+                // Basic format fallback:
+                sumDate.textContent = e.target.value;
+            } else {
+                sumDate.textContent = '--';
+            }
+        });
+
+        // --- Custom Doctor Dropdown Logic ---
+        const docBtn = document.getElementById('docDropdownBtn');
+        const docMenu = document.getElementById('docMenu');
+        const docSelectedContent = document.getElementById('docSelectedContent');
+        const docChevron = document.getElementById('docChevron');
+        const docOptions = document.querySelectorAll('.doc-option');
+
+        function updateDoctorSelection(val, name, spec, avatarText) {
+            realDocSelect.value = val;
+            docSelectedContent.innerHTML = `
+                <div class="doc-avatar shadow-sm">${avatarText}</div>
+                <div class="d-flex flex-column justify-content-center pt-1">
+                    <div class="fw-bold text-dark lh-sm mb-1">${name}</div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge rounded-pill bg-light text-secondary border fw-medium" style="font-size: 0.7rem;">${spec}</span>
+                        <span class="badge rounded-pill bg-success bg-opacity-10 text-success fw-medium d-none d-sm-inline-block" style="font-size: 0.7rem;"><i class="bi bi-check-circle-fill me-1"></i>Available</span>
+                    </div>
+                </div>
+            `;
+            sumDoctor.textContent = name;
+            sumSpec.textContent = spec;
+        }
+
+        docBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = docMenu.classList.contains('show');
+            if (isOpen) {
+                docMenu.classList.remove('show');
+                docBtn.classList.remove('active');
+                docChevron.style.transform = 'rotate(0deg)';
+            } else {
+                docMenu.classList.add('show');
+                docBtn.classList.add('active');
+                docChevron.style.transform = 'rotate(180deg)';
+            }
+        });
+
+        docOptions.forEach(opt => {
+            opt.addEventListener('click', () => {
+                const val = opt.getAttribute('data-val');
+                const name = opt.getAttribute('data-name');
+                const spec = opt.getAttribute('data-spec');
+                const avatar = opt.querySelector('.doc-avatar').textContent;
+
+                updateDoctorSelection(val, name, spec, avatar);
+
+                docMenu.classList.remove('show');
+                docBtn.classList.remove('active');
+                docChevron.style.transform = 'rotate(0deg)';
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!docBtn.contains(e.target) && !docMenu.contains(e.target)) {
+                docMenu.classList.remove('show');
+                docBtn.classList.remove('active');
+                docChevron.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        // Initialize active doctor if page reloaded with value
+        if (realDocSelect.value) {
+            const activeOpt = document.querySelector(`.doc-option[data-val="${realDocSelect.value}"]`);
+            if (activeOpt) {
+                const name = activeOpt.getAttribute('data-name');
+                const spec = activeOpt.getAttribute('data-spec');
+                const avatar = activeOpt.querySelector('.doc-avatar').textContent;
+                updateDoctorSelection(realDocSelect.value, name, spec, avatar);
+            }
+        }
+
+        // --- Custom Time Slot Dropdown Logic ---
+        const timeBtn = document.getElementById('timeDropdownBtn');
+        const timeMenu = document.getElementById('timeMenu');
+        const timeSelectedContent = document.getElementById('timeSelectedContent');
+        const timeChevron = document.getElementById('timeChevron');
+        const timeOptions = document.querySelectorAll('.time-option');
+        const slotsCount = document.getElementById('slotsAvailableCount');
+
+        if (slotsCount) {
+            slotsCount.textContent = timeOptions.length;
+        }
+
+        function updateTimeSelection(val, label) {
+            realTimeSelect.value = val;
+            timeSelectedContent.innerHTML = `
+                <div class="doc-avatar shadow-sm"><i class="bi bi-clock-history"></i></div>
+                <div class="d-flex flex-column justify-content-center pt-1">
+                    <div class="fw-bold text-dark lh-sm mb-1">${label}</div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge rounded-pill bg-success bg-opacity-10 text-success fw-medium d-none d-sm-inline-block" style="font-size: 0.7rem;"><i class="bi bi-check-circle-fill me-1"></i>Selected</span>
+                    </div>
+                </div>
+            `;
+            sumTime.textContent = label;
+        }
+
+        timeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = timeMenu.classList.contains('show');
+            if (isOpen) {
+                timeMenu.classList.remove('show');
+                timeBtn.classList.remove('active');
+                timeChevron.style.transform = 'rotate(0deg)';
+            } else {
+                timeMenu.classList.add('show');
+                timeBtn.classList.add('active');
+                timeChevron.style.transform = 'rotate(180deg)';
+            }
+        });
+
+        timeOptions.forEach(opt => {
+            opt.addEventListener('click', () => {
+                const val = opt.getAttribute('data-val');
+                const label = opt.getAttribute('data-label');
+
+                updateTimeSelection(val, label);
+
+                timeMenu.classList.remove('show');
+                timeBtn.classList.remove('active');
+                timeChevron.style.transform = 'rotate(0deg)';
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!timeBtn.contains(e.target) && !timeMenu.contains(e.target)) {
+                timeMenu.classList.remove('show');
+                timeBtn.classList.remove('active');
+                timeChevron.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        // Initialize active time slot
+        if (realTimeSelect.value) {
+            const activeOpt = document.querySelector(`.time-option[data-val="${realTimeSelect.value}"]`);
+            if (activeOpt) {
+                updateTimeSelection(realTimeSelect.value, activeOpt.getAttribute('data-label'));
+            }
+        }
+
+        // --- Form Submission Animation ---
+        form.addEventListener('submit', (e) => {
+            // Simple validation check before animation
+            if (patientInput.value && dateInput.value && realDocSelect.value && realTimeSelect.value) {
+                submitBtn.classList.add('loading');
+            }
+        });
+
+        // Pre-fill summaries if values exist (e.g. after a validation error reload)
+        if (patientInput.value) sumPatient.textContent = patientInput.value;
+        if (dateInput.value) sumDate.textContent = dateInput.value;
+    });
+</script>
+{% endblock %}
+{% endblock %}

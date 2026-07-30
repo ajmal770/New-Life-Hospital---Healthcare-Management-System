@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}500 Error - Hospital Management System{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-50 py-5">
+    <div class="text-center hms-card p-5">
+        <i class="bi bi-x-circle text-danger mb-3" style="font-size: 4rem;"></i>
+        <h1 class="display-4 font-weight-bold">500</h1>
+        <h3 class="mb-4">Internal Server Error</h3>
+        <p class="text-muted mb-4">Oops! Something went wrong on our end. Please try again later or contact support if the issue persists.</p>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Return to Dashboard</a>
+    </div>
+</div>
+{% endblock %}
